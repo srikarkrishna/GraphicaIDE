@@ -3,18 +3,18 @@ package icons;
 import java.awt.*;
 import interfaces.Icon;
 
-public class LessThanIcon implements Icon {
+public class LessThanIcon extends Icons {
     private static final String iconType = "<";
-    private int x,y;
 
-    public LessThanIcon(int x, int y){
-        this.x = x;
-        this.y = y;
+    public LessThanIcon(Graphics g, int x, int y){
+
+        super(x,y,iconType);
+        super.draw(g);
     }
 
-    @Override
-    public void draw(Graphics g) {
-        g.drawRect(x,y,200,40);
-        g.drawString(iconType, x+100, y+20);
-    }
+//    @Override
+//    public void draw(Graphics g) {
+//        g.drawRect(x,y,160,50);
+//        g.drawString(iconType, x+100, y+20);
+//    }
 }
