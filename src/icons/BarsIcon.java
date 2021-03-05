@@ -3,18 +3,23 @@ package icons;
 import java.awt.*;
 import interfaces.Icon;
 
-public class BarsIcon extends Icons {
+public class BarsIcon extends Icons implements Icon {
     private static final String iconType = "||";
+    int width = 160,height=50;
+    int x,y;
 
-
-    public BarsIcon(Graphics g, int x, int y){
-        super(x,y,iconType);
-        super.draw(g);
+    public BarsIcon(){
+        super();
+        //super(x,y,iconType);
+        //super.draw(g);
     }
 
-//    @Override
-//    public void draw(Graphics g) {
-//        g.drawRect(x,y,160,50);
-//        g.drawString(iconType, x+100, y+20);
-//    }
+    @Override
+    public void draw(Graphics g, int x, int y) {
+        this.x = x;
+        this.y = y;
+        System.out.println(x+" "+y);
+        g.drawRect(x,y,width,height);
+        g.drawString(iconType, x+width/2, y+height/2);
+    }
 }

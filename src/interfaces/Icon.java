@@ -4,5 +4,5 @@ import javax.swing.*;
 import java.awt.*;
 
 public interface Icon  {
-    public void draw(Graphics g);
+    void draw(Graphics g, int x, int y);
 }

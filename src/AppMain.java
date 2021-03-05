@@ -1,5 +1,9 @@
+import icons.BarsIcon;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AppMain extends JFrame{
     final static String windowTitle = "GRAPHICAL IDE";
@@ -7,6 +11,8 @@ public class AppMain extends JFrame{
     RightPanel rPanel;
     MenuBar menuBar;
     BorderLayout borderLayoutLeft;
+    interfaces.Icon icon = new BarsIcon();
+
 
     public AppMain(String title) {
         setTitle(title);
@@ -40,9 +46,47 @@ public class AppMain extends JFrame{
        // pane.setDividerLocation(pane.getSize().width/5);
         vPane.resetToPreferredSizes();
         hPane.resetToPreferredSizes();
+        addPanelActionListeners();
     }
     public static void main(String args[])
     {
         JFrame jframe = new AppMain(windowTitle);
+    }
+
+    public void addPanelActionListeners(){
+
+        JButton []iconsArray = LeftPanel.getIconsArray();
+      for(int i=0; i< iconsArray.length;i++) {
+          JButton button = iconsArray[i];
+          button.addMouseListener(new MouseAdapter() {
+              @Override
+              public void mouseReleased(MouseEvent e) {
+                  super.mouseClicked(e);
+                  if(RightPanel.jTabbedPane.contains(e.getPoint())){
+                      System.out.println("Hello panel");
+                  }
+                  System.out.println("haa"+e.getX()+" "+e.getY());
+
+                  String selectedIconText = button.getText();
+              }
+          });
+          button.addMouseMotionListener(new MouseAdapter() {
+              @Override
+              public void mouseDragged(MouseEvent e) {
+                  super.mouseDragged(e);
+                  //  System.out.println(button.getText()+" Main");
+                  if(button.getText().equals("||")) {
+                      //     if(isClicked)
+                    //  System.out.println(button.getText());
+
+                      icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX()-button.getWidth()/3),
+//                                        - button.getLocationOnScreen().getX()),
+                              (int) (MouseInfo.getPointerInfo().getLocation().getY()-button.getHeight()/3));
+//                                        - button.getLocationOnScreen().getY()));
+                      repaint();
+                  }
+              }
+          });
+      }
     }
 }
