@@ -6,7 +6,8 @@ import interfaces.Icon;
 public class HyphenIcon extends Icons implements Icon {
     private static final String iconType = "-";
     int width = 160,height=50;
-    public HyphenIcon(Graphics g, int x, int y){
+    int x,y;
+    public HyphenIcon(){
 
 //        super(x,y,iconType);
 //        super.draw(g);
@@ -15,7 +16,11 @@ public class HyphenIcon extends Icons implements Icon {
     public void draw(Graphics g, int x, int y) {
         //this.width = width;
         //this.height =height;
+        this.x = x;
+        this.y = y;
         g.drawRect(x,y,width,height);
-        g.drawString(iconType, x+100, y+20);
+        g.drawString(iconType, x+width/2, y+height/2);
+        g.drawOval(x + 10, y + 18, 10, 10);
+        g.drawOval(x + width - 15, y + 18, 10, 10);
     }
 }
