@@ -3,7 +3,7 @@ import javax.swing.*;
         import java.awt.event.*;
         import java.io.*;
         public class AddTab{
-            JTabbedPane tab;
+            JTabbedPane tab,tab1;
             public static void main(String[] args){
                 AddTab ar = new AddTab();
             }
