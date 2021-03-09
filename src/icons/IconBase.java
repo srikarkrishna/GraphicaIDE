@@ -1,7 +1,5 @@
 package icons;
 
-import interfaces.Icon;
-
 public class IconBase {
     public Icons getIconObject(String iconType){
         Icons icon = null;

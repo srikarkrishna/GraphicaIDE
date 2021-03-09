@@ -8,14 +8,7 @@ import java.awt.event.MouseEvent;
 
 
 public class LeftPanel extends JPanel {
-//    Icons openParenthesisIcon;
-//    Icons closeParenthesisIcon;
-//    Icons greaterThanIcon;
-//    Icons lessThanIcon;
-//    Icons loopIcon;
-//    Icons barsIcon;
-//    Icons hyphenIcon;
-    interfaces.Icon icon = new BarsIcon();
+
     public static JButton[] getIconsArray() {
         return iconsArray;
     }
@@ -23,12 +16,14 @@ public class LeftPanel extends JPanel {
     private static final JButton[] iconsArray = new JButton[7];
     GridLayout iconLayout = new GridLayout(7,1);
 
-
+    /*************************************************************************************
+     *  - public Constructor
+     *  - Author : Srikar
+     *  - Creation Date : 03/05/2021
+     *  - Desc: Initiating the frame and configuring the properties for the frame
+     ***************************************************************************************/
     public LeftPanel() {
-
-
         initializeIcons();
-        addIconActionListeners();
         setLayout(iconLayout);
     }
 
@@ -60,33 +55,6 @@ public class LeftPanel extends JPanel {
             this.add(jButton.getText(), jButton);
         }
 
-    }
-
-    public void addIconActionListeners(){
-
-        for (JButton button : iconsArray) {
-
-            button.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    super.mouseClicked(e);
-                    String selectedIconText = button.getText();
-                }
-            });
-
-
-            button.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    super.mousePressed(e);
-                    if (button.getText().equals("||")) {
-                            icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - 80),
-                                    (int) (MouseInfo.getPointerInfo().getLocation().getY() - 130));
-                           // repaint();
-                    }
-                }
-            });
-        }
     }
 
 }

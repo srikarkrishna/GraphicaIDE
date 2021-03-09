@@ -15,10 +15,12 @@ public class AppMain extends JFrame{
     LeftPanel lPanel;
     JTabbedPane jTabbedPane;
     JMenuBar menuBar;
-    Icons icon = new BarsIcon();
+    Icons icon;
     String selectedIconText;
     static int tabIndex=2;
     IconBase iconBase;
+    JSplitPane horizontalPane;
+    JSplitPane verticalPane;
 
     public AppMain(String title) {
         setTitle(title);
@@ -27,8 +29,8 @@ public class AppMain extends JFrame{
         createWorkSpace();
         menuBar = new JMenuBar();
         addMenu();
-        JSplitPane horizontalPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, lPanel, jTabbedPane);
-        JSplitPane verticalPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuBar, horizontalPane);
+        horizontalPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, lPanel, jTabbedPane);
+        verticalPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuBar, horizontalPane);
         horizontalPane.setResizeWeight(0.2);
         verticalPane.setEnabled(false);
         verticalPane.setResizeWeight(0.03);
@@ -42,10 +44,8 @@ public class AppMain extends JFrame{
         horizontalPane.resetToPreferredSizes();
         addPanelActionListeners();
     }
-    public static void main(String[] args)
-    {
-        JFrame jframe = new AppMain(windowTitle);
-    }
+
+
     public void paintComponents(Graphics g) {
         super.paintComponents(g);
     }
@@ -62,8 +62,31 @@ public class AppMain extends JFrame{
         for (JButton button : iconsArray) {
             button.addMouseListener(new MouseAdapter() {
                 @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    selectedIconText = button.getText();
+                    icon = iconBase.getIconObject(button.getText());
+                }
+            });
+
+
+            button.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    super.mousePressed(e);
+                    selectedIconText = button.getText();
+                    icon = iconBase.getIconObject(button.getText());
+                        icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - 80),
+                                (int) (MouseInfo.getPointerInfo().getLocation().getY() - 130));
+                        repaint();
+                }
+            });
+
+            button.addMouseListener(new MouseAdapter() {
+                @Override
                 public void mouseReleased(MouseEvent e) {
                     selectedIconText = button.getText();
+                    icon = iconBase.getIconObject(button.getText());
                     super.mouseReleased(e);
                     int tabIndex = jTabbedPane.getSelectedIndex();
                     WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
@@ -73,6 +96,7 @@ public class AppMain extends JFrame{
                     tab.repaint();
                 }
             });
+
             button.addMouseMotionListener(new MouseAdapter() {
                 @Override
                 public void mouseDragged(MouseEvent e) {
@@ -111,5 +135,9 @@ public class AppMain extends JFrame{
                 workingPanel.setBackground(backgroundColor);
                 jTabbedPane.add(tabName, workingPanel);
         });
+    }
+    public static void main(String[] args)
+    {
+        JFrame jframe = new AppMain(windowTitle);
     }
 }
