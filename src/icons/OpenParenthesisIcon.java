@@ -15,6 +15,6 @@ public class OpenParenthesisIcon extends Icons implements Icon {
         this.y = y;
         g.drawRect(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
-        g.drawOval(x + y + 20, y + 18, 10, 10);
+        g.drawOval(x + y - 20, y + 18, 10, 10);
     }
 }

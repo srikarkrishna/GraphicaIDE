@@ -17,7 +17,7 @@ public class IconBase {
             icon =  new LessThanIcon();
         } else if (iconType.equals("@")) {
             icon =  new LoopIcon();
-        } else if (iconType.equals("C")) {
+        } else if (iconType.equals("(")) {
             icon =  new OpenParenthesisIcon();
         }
         return icon;
