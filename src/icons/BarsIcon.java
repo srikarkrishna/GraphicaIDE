@@ -9,16 +9,14 @@ public class BarsIcon extends Icons implements Icon {
     int x,y;
 
     public BarsIcon(){
-        super();
-        //super(x,y,iconType);
-        //super.draw(g);
+
     }
 
     @Override
     public void draw(Graphics g, int x, int y) {
         this.x = x;
         this.y = y;
-        System.out.println(x+" "+y);
+        System.out.println(x+"Hello "+y);
         g.drawRect(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
     }

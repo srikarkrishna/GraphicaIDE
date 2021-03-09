@@ -9,13 +9,9 @@ public class HyphenIcon extends Icons implements Icon {
     int x,y;
     public HyphenIcon(){
 
-//        super(x,y,iconType);
-//        super.draw(g);
     }
 
     public void draw(Graphics g, int x, int y) {
-        //this.width = width;
-        //this.height =height;
         this.x = x;
         this.y = y;
         g.drawRect(x,y,width,height);

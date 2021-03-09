@@ -4,7 +4,6 @@ import javax.swing.JFileChooser;
 
 public class Load {
     public static void load(String[] args) {
-        // write your code here
         File file;
         Scanner fileIn;
         int response;
