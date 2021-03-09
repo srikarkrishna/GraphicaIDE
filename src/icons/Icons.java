@@ -16,6 +16,5 @@ public abstract class Icons implements Icon {
 
     }
 
-
-    public abstract void draw(Graphics g, int x, int y);
+   public abstract void draw(Graphics g, int x, int y);
 }

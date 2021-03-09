@@ -82,15 +82,11 @@ public class LeftPanel extends JPanel {
                     if (button.getText().equals("||")) {
                             icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - 80),
                                     (int) (MouseInfo.getPointerInfo().getLocation().getY() - 130));
-                            repaint();
+                           // repaint();
                     }
                 }
             });
         }
     }
 
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-    }
 }

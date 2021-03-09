@@ -1,4 +1,5 @@
 import icons.BarsIcon;
+import icons.IconBase;
 import icons.Icons;
 
 import javax.swing.*;
@@ -13,9 +14,10 @@ public class AppMain extends JFrame{
     LeftPanel lPanel;
     JTabbedPane jTabbedPane;
     JMenuBar menuBar;
-    BorderLayout borderLayoutLeft;
     Icons icon = new BarsIcon();
+    String selectedIconText;
     static int tabIndex=2;
+    IconBase iconBase;
 
     public AppMain(String title) {
         setTitle(title);
@@ -24,28 +26,27 @@ public class AppMain extends JFrame{
         createWorkSpace();
         menuBar = new JMenuBar();
         addMenu();
-        borderLayoutLeft = new BorderLayout();
-        JSplitPane hPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, lPanel, jTabbedPane);
-        JSplitPane vPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuBar, hPane);
-        hPane.setResizeWeight(0.2);
-        vPane.setEnabled(false);
-        vPane.setResizeWeight(0.1);
-        add(vPane);
-        lPanel.setBackground(Color.CYAN);
-        jTabbedPane.setBackground(Color.GREEN);
+        JSplitPane horizontalPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, lPanel, jTabbedPane);
+        JSplitPane verticalPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuBar, horizontalPane);
+        horizontalPane.setResizeWeight(0.2);
+        verticalPane.setEnabled(false);
+        verticalPane.setResizeWeight(0.03);
+        add(verticalPane);
         menuBar.setBackground(Color.BLUE);
         setSize(1280, 720);
         setVisible(true);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        vPane.resetToPreferredSizes();
-        hPane.resetToPreferredSizes();
+        verticalPane.resetToPreferredSizes();
+        horizontalPane.resetToPreferredSizes();
         addPanelActionListeners();
     }
     public static void main(String[] args)
     {
         JFrame jframe = new AppMain(windowTitle);
-
+    }
+    public void paintComponents(Graphics g) {
+        super.paintComponents(g);
     }
 
     private void createWorkSpace() {
@@ -55,41 +56,47 @@ public class AppMain extends JFrame{
     }
 
     public void addPanelActionListeners(){
-
+        iconBase = new IconBase();
         JButton []iconsArray = LeftPanel.getIconsArray();
         for (JButton button : iconsArray) {
             button.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseReleased(MouseEvent e) {
+                    selectedIconText = button.getText();
                     super.mouseReleased(e);
-                    WorkingPanel tab = (WorkingPanel) jTabbedPane.getSelectedComponent();
-                    icon.draw(tab.getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX()),
-                            (int) (MouseInfo.getPointerInfo().getLocation().getY()));
-                    repaint();
+                    int tabIndex = jTabbedPane.getSelectedIndex();
+                    WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
+                    System.out.println(tabIndex+"Tab Name");
+                    icon.draw(tab.getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX()-320),
+                            (int) (MouseInfo.getPointerInfo().getLocation().getY())-160);
+                    tab.repaint();
                 }
             });
             button.addMouseMotionListener(new MouseAdapter() {
                 @Override
                 public void mouseDragged(MouseEvent e) {
                     super.mouseDragged(e);
-                    if (button.getText().equals("||")) {
+                    selectedIconText = button.getText();
+                    icon = iconBase.getIconObject(button.getText());
                         icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - button.getWidth() / 3),
                                 (int) (MouseInfo.getPointerInfo().getLocation().getY() - button.getHeight() / 3));
                         repaint();
-                    }
                 }
             });
         }
     }
 
     private void addMenu(){
+        menuBar.setLayout(new FlowLayout(FlowLayout.CENTER));
         JButton buttonNewTab = new JButton("New Tab");
         JButton buttonLoad = new JButton("Load");
         JButton buttonSave = new JButton("Save");
         menuBar.add(buttonNewTab);
         menuBar.add(buttonLoad);
         menuBar.add(buttonSave);
-
+        buttonNewTab.setPreferredSize(new Dimension(150,40));
+        buttonLoad.setPreferredSize(new Dimension(150,40));
+        buttonSave.setPreferredSize(new Dimension(150,40));
         buttonNewTab.addActionListener(e -> {
                 String tabName = "Space ";
                 tabName += tabIndex;
