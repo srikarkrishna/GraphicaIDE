@@ -1,6 +1,14 @@
 package icons;
 
 public class IconBase {
+    /*************************************************************************************
+     *  - Method Name: getIconObject()
+     *  - Input Parameters : String iconType
+     *  - Return Type :Icons
+     *  - Author : Srikar
+     *  - Creation Date : 03/07/2021
+     *  - Desc: Returns the icon object based on the string type on which it is called.
+     ***************************************************************************************/
     public Icons getIconObject(String iconType){
         Icons icon = null;
         if (iconType.equals("||")) {

@@ -21,7 +21,12 @@ public class AppMain extends JFrame{
     IconBase iconBase;
     JSplitPane horizontalPane;
     JSplitPane verticalPane;
-
+    /*************************************************************************************
+     *  - public Constructor
+     *  - Author : Sulabh
+     *  - Creation Date : 03/06/2021
+     *  - Desc: Place the TabbedPane, Panels and Menubar on the GUI.
+     ***************************************************************************************/
     public AppMain(String title) {
         setTitle(title);
         lPanel = new LeftPanel();
@@ -55,7 +60,14 @@ public class AppMain extends JFrame{
         jTabbedPane.add("Space 1", workingPanel);
         workingPanel.setBackground(Color.ORANGE);
     }
-
+    /*************************************************************************************
+     *  - Method Name: addPanelActionListeners()
+     *  - Input Parameters : none
+     *  - Return Type :none
+     *  - Authors : Samarth, Srikar
+     *  - Creation Date : 03/07/2021
+     *  - Desc: Action listeners to the icon buttons in the left panel
+     ***************************************************************************************/
     public void addPanelActionListeners(){
         iconBase = new IconBase();
         JButton []iconsArray = LeftPanel.getIconsArray();
@@ -110,7 +122,14 @@ public class AppMain extends JFrame{
             });
         }
     }
-
+    /*************************************************************************************
+     *  - Method Name: addMenu()
+     *  - Input Parameters : none
+     *  - Return Type :none
+     *  - Author : Sulabh
+     *  - Creation Date : 03/06/2021
+     *  - Desc: Adds buttons and action listeners of them in the menu panel.
+     ***************************************************************************************/
     private void addMenu(){
         menuBar.setLayout(new FlowLayout(FlowLayout.CENTER));
         JButton buttonNewTab = new JButton("New Tab");

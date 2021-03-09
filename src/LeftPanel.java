@@ -18,7 +18,7 @@ public class LeftPanel extends JPanel {
 
     /*************************************************************************************
      *  - public Constructor
-     *  - Author : Srikar
+     *  - Author : Samarth
      *  - Creation Date : 03/05/2021
      *  - Desc: Initiating the frame and configuring the properties for the frame
      ***************************************************************************************/
@@ -26,7 +26,14 @@ public class LeftPanel extends JPanel {
         initializeIcons();
         setLayout(iconLayout);
     }
-
+    /*************************************************************************************
+     *  - Method Name: initializeIcons()
+     *  - Input Parameters : none
+     *  - Return Type :Icons
+     *  - Author : Samarth
+     *  - Creation Date : 03/07/2021
+     *  - Desc: Adds icons into the left panel.
+     ***************************************************************************************/
     public void initializeIcons(){
 
         JButton openBracket = new JButton("(");

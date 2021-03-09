@@ -3,7 +3,15 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 
 public class Load {
-    public static void load(String[] args) {
+    /*************************************************************************************
+     *  - Method Name: load()
+     *  - Input Parameters : WorkingPanel workingPanel
+     *  - Return Type :void
+     *  - Author : Keshav
+     *  - Creation Date : 03/08/2021
+     *  - Desc: Loads the content of file into the Working panel object.
+     ***************************************************************************************/
+    public static void load(WorkingPanel workingPanel) {
         File file;
         Scanner fileIn;
         int response;
@@ -21,12 +29,12 @@ public class Load {
                     while(fileIn.hasNextLine()){
                         String line = fileIn.nextLine();
                         System.out.println(line);
-
+                        /**In Progress**/
                     }
 
                 }
                 else{
-                    System.out.println("That was not a file!");
+                    System.out.println("Incorrect file format!");
                 }
                 fileIn.close();
             } catch (FileNotFoundException e) {
