@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 
 public class AppMain extends JFrame{
     final static String windowTitle = "GRAPHICAL IDE";
@@ -92,10 +93,15 @@ public class AppMain extends JFrame{
 
         buttonNewTab.addActionListener(e -> {
                 String tabName = "Space ";
+                Random rand = new Random();
+                float r = rand.nextFloat();
+                float g = rand.nextFloat();
+                float b = rand.nextFloat();
+                Color backgroundColor = new Color(r, g, b);
                 tabName += tabIndex;
                 tabIndex += 1;
                 WorkingPanel workingPanel = new WorkingPanel();
-                workingPanel.setBackground(Color.ORANGE);
+                workingPanel.setBackground(backgroundColor);
                 jTabbedPane.add(tabName, workingPanel);
         });
     }
