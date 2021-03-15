@@ -15,6 +15,22 @@ public abstract class Icons implements Icon {
     String iconType;
     int X, Y;
 
+    public int getX() {
+        return X;
+    }
+
+    public int getY() {
+        return Y;
+    }
+
+    public void setX(int x) {
+        this.X = x;
+    }
+
+    public void setY(int y) {
+        this.Y = y;
+    }
+
 
     public Icons(){
 

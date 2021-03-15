@@ -81,7 +81,6 @@ public class AppMain extends JFrame{
                 }
             });
 
-
             button.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -103,8 +102,17 @@ public class AppMain extends JFrame{
                     int tabIndex = jTabbedPane.getSelectedIndex();
                     WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
                     System.out.println(tabIndex+"Tab Name");
-                    icon.draw(tab.getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX()-320),
-                            (int) (MouseInfo.getPointerInfo().getLocation().getY())-160);
+
+                    icon.setX((int) MouseInfo.getPointerInfo().getLocation().getX());
+                    icon.setY((int) MouseInfo.getPointerInfo().getLocation().getY());
+
+//                    icon.setX(e.getX());
+//                    icon.setY(e.getY());
+
+//                    tab.paintComponent(tab.getGraphics());
+                    tab.iconList.add(icon);
+//                    icon.draw(tab.getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX()-320),
+//                            (int) (MouseInfo.getPointerInfo().getLocation().getY())-160);
                     tab.repaint();
                 }
             });
@@ -155,6 +163,8 @@ public class AppMain extends JFrame{
                 jTabbedPane.add(tabName, workingPanel);
         });
     }
+
+
     public static void main(String[] args)
     {
         JFrame jframe = new AppMain(windowTitle);
