@@ -10,7 +10,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
- * @author Keshav
+ * @author Keshav & Sneha
  * @since 03-16-2020
  *
  *
