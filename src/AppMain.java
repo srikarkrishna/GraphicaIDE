@@ -154,6 +154,9 @@ public class AppMain extends JFrame{
                 workingPanel.setBackground(backgroundColor);
                 jTabbedPane.add(tabName, workingPanel);
         });
+        buttonSave.addActionListener(new SaveFileManager());
+        //buttonLoad.addActionListener(new LoadFileManager());
+
     }
     public static void main(String[] args)
     {
