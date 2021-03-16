@@ -89,40 +89,35 @@ public class AppMain extends JFrame{
                     super.mousePressed(e);
                     selectedIconText = button.getText();
                     icon = iconBase.getIconObject(button.getText());
-                        icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - 80),
-                                (int) (MouseInfo.getPointerInfo().getLocation().getY() - 130));
-                        repaint();
+                    icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - 80),
+                            (int) (MouseInfo.getPointerInfo().getLocation().getY() - 130));
+                    repaint();
                 }
             });
 
             button.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    selectedIconText = button.getText();
-                    icon = iconBase.getIconObject(button.getText());
                     super.mouseReleased(e);
                     int tabIndex = jTabbedPane.getSelectedIndex();
                     WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
-                    System.out.println(tabIndex+"Tab Name");
-
-//                    icon.setX((int) MouseInfo.getPointerInfo().getLocation().x);
-//                    icon.setY((int) MouseInfo.getPointerInfo().getLocation().y);
-
-
-
-//                    System.out.println("e.getX" + " " + e.getX());
+                    if(tab.getMousePosition()!=null) {
+                        selectedIconText = button.getText();
+                        icon = iconBase.getIconObject(button.getText());
+                        System.out.println("e.getX" + " " + e.getX() + " e.getY" + " " + e.getY());
 //                    System.out.println("tab.popup.getX" + " " + tab.getMousePosition().getX());
 //                    System.out.println("e.getXOnScreen" + " " + e.getXOnScreen());
 //                    System.out.println("MouseInfo.getPointerInfo().getLocation().getX()" + " " + MouseInfo.getPointerInfo().getLocation().getX());
 //                    System.out.println("MouseInfo.getPointerInfo().getLocation().x" + " " + MouseInfo.getPointerInfo().getLocation().x);
 
-                    icon.setX((int) tab.getMousePosition().getX() - Icons.width/2);
-                    icon.setY((int) tab.getMousePosition().getY() - Icons.height/2);
+                        icon.setX((int) tab.getMousePosition().getX() - Icons.width / 2);
+                        icon.setY((int) tab.getMousePosition().getY() - Icons.height / 2);
 
-                    tab.iconList.add(icon);
+                        tab.iconList.put(icon,"");
 //                    icon.draw(tab.getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX()-320),
 //                            (int) (MouseInfo.getPointerInfo().getLocation().getY())-160);
-                    tab.repaint();
+                        tab.repaint();
+                    }
                 }
             });
 
@@ -132,9 +127,9 @@ public class AppMain extends JFrame{
                     super.mouseDragged(e);
                     selectedIconText = button.getText();
                     icon = iconBase.getIconObject(button.getText());
-                        icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - button.getWidth() / 3),
-                                (int) (MouseInfo.getPointerInfo().getLocation().getY() - button.getHeight() / 3));
-                        repaint();
+                    icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - button.getWidth() / 3),
+                            (int) (MouseInfo.getPointerInfo().getLocation().getY() - button.getHeight() / 3));
+                    repaint();
                 }
             });
         }
@@ -159,17 +154,17 @@ public class AppMain extends JFrame{
         buttonLoad.setPreferredSize(new Dimension(150,40));
         buttonSave.setPreferredSize(new Dimension(150,40));
         buttonNewTab.addActionListener(e -> {
-                String tabName = "Space ";
-                Random rand = new Random();
-                float r = rand.nextFloat();
-                float g = rand.nextFloat();
-                float b = rand.nextFloat();
-                Color backgroundColor = new Color(r, g, b);
-                tabName += tabIndex;
-                tabIndex += 1;
-                WorkingPanel workingPanel = new WorkingPanel();
-                workingPanel.setBackground(backgroundColor);
-                jTabbedPane.add(tabName, workingPanel);
+            String tabName = "Space ";
+            Random rand = new Random();
+            float r = rand.nextFloat();
+            float g = rand.nextFloat();
+            float b = rand.nextFloat();
+            Color backgroundColor = new Color(r, g, b);
+            tabName += tabIndex;
+            tabIndex += 1;
+            WorkingPanel workingPanel = new WorkingPanel();
+            workingPanel.setBackground(backgroundColor);
+            jTabbedPane.add(tabName, workingPanel);
         });
         buttonSave.addActionListener(new SaveFileManager(this));
         buttonLoad.addActionListener(new LoadFileManager(this));

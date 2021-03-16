@@ -4,21 +4,21 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.Timer;
+
 import icons.Icons;
 
 public class WorkingPanel extends JPanel {
 
-    ArrayList<Icons> iconList = new ArrayList<>();
+    HashMap<Icons,String> iconList = new HashMap<>();
     public WorkingPanel() {
         addIconActionListeners();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(int i=0; i < iconList.size(); i ++ ){
-            Icons icon = iconList.get(i);
-
+        for (Icons icon : iconList.keySet()){
 //            System.out.println(icon.getX()+""+icon.getY());
 //            icon.draw(g, icon.getX()-380, icon.getY()-160);
 
@@ -43,9 +43,9 @@ public class WorkingPanel extends JPanel {
                 int point_x = e.getX();
                 int point_y = e.getY();
 
-                for(int i=0; i < iconList.size(); i++){
+                for(Icons icon:iconList.keySet()){
 
-                    Icons icon = iconList.get(i);
+                   // Icons icon = iconList.get(i);
                     int icon_x1 = icon.getX() - Icons.width/2;
 //                    int icon_x1 = icon.getX();
                     int icon_x2 = icon.getX() + Icons.width/2;
@@ -72,9 +72,9 @@ public class WorkingPanel extends JPanel {
                 int point_x = e.getX();
                 int point_y = e.getY();
 
-                for(int i=0; i < iconList.size(); i++){
+                for(Icons icon:iconList.keySet()){
 
-                    Icons icon = iconList.get(i);
+                    // Icons icon = iconList.get(i);
 //                    int icon_x1 = icon.getX() - Icons.width/2;
                     int icon_x1 = icon.getX();
                     int icon_x2 = icon.getX() + Icons.width;
@@ -88,10 +88,47 @@ public class WorkingPanel extends JPanel {
                         icon.setY(e.getY() - Icons.height/2);
                     }
                 }
+                repaint();
+            }
+        });
+
+        this.addMouseListener(new MouseAdapter() {
+            boolean isAlreadyOneClick;
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (isAlreadyOneClick) {
+                    System.out.println("Double hey");
+                    int point_x = e.getX();
+                    int point_y = e.getY();
+                    for(Icons icon:iconList.keySet()){
+                        String value = iconList.get(icon);
+                        int icon_x1 = icon.getX();
+                        int icon_x2 = icon.getX() + Icons.width;
+                        int icon_y1 = icon.getY();
+                        int icon_y2 = icon.getY() + Icons.height;
+                        if (checkPoint(icon_x1,icon_y1,icon_x2,icon_y2,point_x,point_y)){
+                            String name=JOptionPane.showInputDialog("Enter Value",value);
+                            iconList.put(icon,name);
+                        }
+                    }
+                    isAlreadyOneClick = false;
+                } else {
+                    isAlreadyOneClick = true;
+                    Timer t = new Timer("doubleClickTimer", false);
+                    t.schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            isAlreadyOneClick = false;
+                        }
+                    }, 500);
+                }
 
                 repaint();
             }
         });
+
 
     }
 
