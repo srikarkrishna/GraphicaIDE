@@ -10,19 +10,25 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author Keshav & Sneha
- * @since 03-16-2020
+ * @since 03-13-2020
  *
  *
  */
-class Load implements ActionListener {
+class LoadFileManager implements ActionListener {
     private String fileName;
-    //private JTabbedPane pane;
     private AppMain mainFrame;
 
-    public Load(AppMain frame) {
+    public LoadFileManager(AppMain frame) {
       this.mainFrame = frame;
     }
 
+    /*************************************************************************************
+     *  - Method Name: actionPerformed()
+     *  - Return Type :none
+     *  - Authors : Sneha
+     *  - Creation Date : 03/13/2021
+     *  - Desc: Action performed while load
+     ***************************************************************************************/
     public void actionPerformed(ActionEvent e) {
         FileInputStream fileInStream = null;
         ObjectInputStream objectInStream = null;
@@ -38,22 +44,14 @@ class Load implements ActionListener {
                 objectInStream = new ObjectInputStream(fileInStream);
                 tabsToOpen = (Component[]) objectInStream.readObject();
 
-                Container content = mainFrame.getContentPane();
-                content.removeAll();
-                //content.add(new OptionsPanel(), BorderLayout.NORTH);
-                content.add(new LeftPanel(), BorderLayout.WEST);
-                JTabbedPane pane = new JTabbedPane();
-                mainFrame.setTabbedPane(pane);
-                content.add(pane, BorderLayout.CENTER);
-                System.out.println("added left panel");
 //                StoreClickPoints.link1=null;
 //                StoreClickPoints.link2=null;
                 mainFrame.workingPanelArray = new ArrayList<WorkingPanel>();
                 int i = 1;
+                mainFrame.jTabbedPane.removeAll();
                 for (Component component : tabsToOpen) {
-                    System.out.println("reading each component in the workspace");
                     WorkingPanel panel = (WorkingPanel) component;
-                    mainFrame.jTabbedPane.add("Tab"+i , panel);
+                    mainFrame.jTabbedPane.add("Space"+i , panel);
                     mainFrame.workingPanelArray.add(panel);
                     panel.repaint();
                     i++;

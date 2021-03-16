@@ -22,7 +22,7 @@ public class AppMain extends JFrame{
     IconBase iconBase;
     JSplitPane horizontalPane;
     JSplitPane verticalPane;
-    static ArrayList<WorkingPanel> workingPanelArray;
+    public static ArrayList<WorkingPanel> workingPanelArray;
     /*************************************************************************************
      *  - public Constructor
      *  - Author : Sulabh
@@ -172,33 +172,13 @@ public class AppMain extends JFrame{
                 jTabbedPane.add(tabName, workingPanel);
         });
         buttonSave.addActionListener(new SaveFileManager(this));
-        buttonLoad.addActionListener(new Load(this));
+        buttonLoad.addActionListener(new LoadFileManager(this));
 
     }
-
 
     public static void main(String[] args)
     {
         JFrame jframe = new AppMain(windowTitle);
     }
 
-    public JTabbedPane getTabbedPane()
-    {
-        return jTabbedPane;
-    }
-
-    public ArrayList<WorkingPanel> getArray()
-    {
-        return workingPanelArray;
-    }
-
-    public void setCanvasArray(ArrayList<WorkingPanel> array)
-    {
-        workingPanelArray = array;
-    }
-
-    public void setTabbedPane(JTabbedPane pane)
-    {
-        jTabbedPane = pane;
-    }
 }

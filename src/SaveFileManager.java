@@ -24,9 +24,6 @@ public class SaveFileManager implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Saving workspace");
-        //need to change
-        JTabbedPane pane = new JTabbedPane();
         FileOutputStream fileOutStream = null;
         ObjectOutputStream objectOutStream = null;
         Component[] tabs = mainFrame.jTabbedPane.getComponents();
