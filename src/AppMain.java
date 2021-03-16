@@ -103,13 +103,20 @@ public class AppMain extends JFrame{
                     WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
                     System.out.println(tabIndex+"Tab Name");
 
-                    icon.setX((int) MouseInfo.getPointerInfo().getLocation().getX());
-                    icon.setY((int) MouseInfo.getPointerInfo().getLocation().getY());
+//                    icon.setX((int) MouseInfo.getPointerInfo().getLocation().x);
+//                    icon.setY((int) MouseInfo.getPointerInfo().getLocation().y);
 
-//                    icon.setX(e.getX());
-//                    icon.setY(e.getY());
 
-//                    tab.paintComponent(tab.getGraphics());
+
+//                    System.out.println("e.getX" + " " + e.getX());
+//                    System.out.println("tab.popup.getX" + " " + tab.getMousePosition().getX());
+//                    System.out.println("e.getXOnScreen" + " " + e.getXOnScreen());
+//                    System.out.println("MouseInfo.getPointerInfo().getLocation().getX()" + " " + MouseInfo.getPointerInfo().getLocation().getX());
+//                    System.out.println("MouseInfo.getPointerInfo().getLocation().x" + " " + MouseInfo.getPointerInfo().getLocation().x);
+
+                    icon.setX((int) tab.getMousePosition().getX() - Icons.width/2);
+                    icon.setY((int) tab.getMousePosition().getY() - Icons.height/2);
+
                     tab.iconList.add(icon);
 //                    icon.draw(tab.getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX()-320),
 //                            (int) (MouseInfo.getPointerInfo().getLocation().getY())-160);

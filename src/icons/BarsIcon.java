@@ -5,7 +5,7 @@ import interfaces.Icon;
 
 public class BarsIcon extends Icons {
     private static final String iconType = "||";
-    int width = 160,height=50;
+//    int width = 160,height=50;
     int x,y;
 
     public BarsIcon(){

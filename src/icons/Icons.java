@@ -12,8 +12,10 @@ import java.awt.geom.Rectangle2D;
  *  - Desc: Describe the abstract Icons class to build each icon class and to track the icons connected in the workspace.
  ***************************************************************************************/
 public abstract class Icons implements Icon {
+    public static int width = 160, height=50;
     String iconType;
     int X, Y;
+
 
     public int getX() {
         return X;
