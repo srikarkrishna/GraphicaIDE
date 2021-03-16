@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class AppMain extends JFrame{
@@ -21,6 +22,7 @@ public class AppMain extends JFrame{
     IconBase iconBase;
     JSplitPane horizontalPane;
     JSplitPane verticalPane;
+    static ArrayList<WorkingPanel> workingPanelArray;
     /*************************************************************************************
      *  - public Constructor
      *  - Author : Sulabh
@@ -169,8 +171,8 @@ public class AppMain extends JFrame{
                 workingPanel.setBackground(backgroundColor);
                 jTabbedPane.add(tabName, workingPanel);
         });
-        buttonSave.addActionListener(new SaveFileManager());
-        //buttonLoad.addActionListener(new LoadFileManager());
+        buttonSave.addActionListener(new SaveFileManager(this));
+        buttonLoad.addActionListener(new Load(this));
 
     }
 
@@ -178,5 +180,25 @@ public class AppMain extends JFrame{
     public static void main(String[] args)
     {
         JFrame jframe = new AppMain(windowTitle);
+    }
+
+    public JTabbedPane getTabbedPane()
+    {
+        return jTabbedPane;
+    }
+
+    public ArrayList<WorkingPanel> getArray()
+    {
+        return workingPanelArray;
+    }
+
+    public void setCanvasArray(ArrayList<WorkingPanel> array)
+    {
+        workingPanelArray = array;
+    }
+
+    public void setTabbedPane(JTabbedPane pane)
+    {
+        jTabbedPane = pane;
     }
 }

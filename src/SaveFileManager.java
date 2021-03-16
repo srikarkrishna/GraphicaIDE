@@ -17,9 +17,10 @@ import javax.swing.JTabbedPane;
  */
 public class SaveFileManager implements ActionListener {
     private String fileName;
+    private AppMain mainFrame;
 
-    public SaveFileManager(){
-
+    public SaveFileManager(AppMain mainFrame){
+        this.mainFrame = mainFrame;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -28,7 +29,7 @@ public class SaveFileManager implements ActionListener {
         JTabbedPane pane = new JTabbedPane();
         FileOutputStream fileOutStream = null;
         ObjectOutputStream objectOutStream = null;
-        Component[] tabs = pane.getComponents();
+        Component[] tabs = mainFrame.jTabbedPane.getComponents();
         try {
             JFileChooser chosenFile = new JFileChooser();
             int showSaveDialog = chosenFile.showSaveDialog(null);
