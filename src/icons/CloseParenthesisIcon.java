@@ -1,6 +1,8 @@
 package icons;
 
 import java.awt.*;
+import java.util.*;
+
 import interfaces.Icon;
 
 public class CloseParenthesisIcon extends Icons {
@@ -8,8 +10,19 @@ public class CloseParenthesisIcon extends Icons {
     private static final String iconType = ")";
 //    int width = 160,height=50;
     int x,y;
+    int inputPoint_X,inputPoint_Y;
 
     public CloseParenthesisIcon(){
+
+        inputPoints = new ArrayList<>();
+        outputPoints = new ArrayList<>();
+
+        this.inputPoint_X = super.X + 10;
+        this.inputPoint_Y = super.Y + 18;
+
+        inputPoints.add(inputPoint_X);
+        inputPoints.add(inputPoint_Y);
+
     }
     /*************************************************************************************
      *  - Method Name: draw()
@@ -25,6 +38,14 @@ public class CloseParenthesisIcon extends Icons {
         this.y = y;
         g.drawRect(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
-        g.drawOval(x + 10, y + 18, 10, 10);
+        g.drawOval(x + 10, y + 20, 10, 10);
+
+//        this.inputPoint_X = super.X + 10;
+//        this.inputPoint_Y = super.Y + 18;
+//        System.out.println("Current value for X" + this.x);
     }
+
+//    @Override
+//    public void setInputPoint_X() { }
+
 }

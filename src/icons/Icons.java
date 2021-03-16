@@ -5,6 +5,8 @@ import interfaces.Icon;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+
 /*************************************************************************************
  *  - public Class
  *  - Author : Sneha
@@ -16,6 +18,10 @@ public abstract class Icons implements Icon, java.io.Serializable {
     String iconType;
     int X, Y;
 
+    protected ArrayList<Integer> inputPoints;
+    protected ArrayList<Integer> outputPoints;
+//    int inputPoint_X;
+//    int inputPoint_Y;
 
     public int getX() {
         return X;
@@ -23,6 +29,14 @@ public abstract class Icons implements Icon, java.io.Serializable {
 
     public int getY() {
         return Y;
+    }
+
+    public ArrayList<Integer> getInputPoints() {
+        return inputPoints;
+    }
+
+    public ArrayList<Integer> getOutputPoints() {
+        return outputPoints;
     }
 
     public void setX(int x) {
