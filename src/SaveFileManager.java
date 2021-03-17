@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import javax.swing.JFileChooser;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
+
 /**
  *
  * @author Sneha
@@ -35,6 +35,7 @@ public class SaveFileManager implements ActionListener {
             objectOutStream = new ObjectOutputStream(fileOutStream);
             objectOutStream.writeObject(tabs);
             fileOutStream.flush();
+            JOptionPane.showMessageDialog(mainFrame, "Workspace saved sucessfully");
             if (objectOutStream != null) {
                 objectOutStream.close();
             }
