@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class OpenParenthesisIcon extends IconMain {
     private static final String iconType = "(";
-    int x,y;
     int outputPoint_X,outputPoint_Y;
     public OpenParenthesisIcon(){
         outputPoints = new ArrayList<>();

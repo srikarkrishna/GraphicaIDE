@@ -1,5 +1,5 @@
 import icons.*;
-public class IconBase {
+public class IconFactory {
     /*************************************************************************************
      *  - Method Name: getIconObject()
      *  - Input Parameters : String iconType

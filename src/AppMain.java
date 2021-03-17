@@ -14,7 +14,7 @@ public class AppMain extends JFrame{
     IconMain icon;
     String selectedIconText;
     static int tabIndex=2;
-    IconBase iconBase;
+    IconFactory iconBase;
     JSplitPane horizontalPane;
     JSplitPane verticalPane;
     public static ArrayList<WorkingPanel> workingPanelArray;
@@ -67,7 +67,7 @@ public class AppMain extends JFrame{
      ***************************************************************************************/
     public void addPanelActionListeners(){
 
-        iconBase = new IconBase();
+        iconBase = new IconFactory();
 
         JButton []iconsArray = LeftPanel.getIconsArray();
         for (JButton button : iconsArray) {

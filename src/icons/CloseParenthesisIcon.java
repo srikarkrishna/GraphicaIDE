@@ -5,7 +5,6 @@ import java.util.*;
 public class CloseParenthesisIcon extends IconMain {
 
     private static final String iconType = ")";
-    int x,y;
     int inputPoint_X,inputPoint_Y;
     public CloseParenthesisIcon(){
         inputPoints = new ArrayList<>();
@@ -20,12 +19,10 @@ public class CloseParenthesisIcon extends IconMain {
      ***************************************************************************************/
     @Override
     public void draw(Graphics g, int x, int y) {
-        this.inputPoint_X = x + 10;
-        this.inputPoint_Y = y + 18;
-
+        inputPoint_X = x + 10;
+        inputPoint_Y = y + 18;
         inputPoints.clear();
         inputPoints.add(new Point(inputPoint_X,inputPoint_Y));
-
         g.drawRect(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
         g.drawOval(x + 10, y + 18, 10, 10);
