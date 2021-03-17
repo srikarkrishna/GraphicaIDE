@@ -28,14 +28,13 @@ public class WorkingPanel extends JPanel {
             icon.draw(g, icon.getX(), icon.getY());
 
         }
-//       .............. Work in Progress .........
-//        for (Icons iconFrom : connections.keySet()) {
-//                Set<Icons> set = connections.get(iconFrom);
-//                for(Icons iconTo: set){
-//                   g.drawLine((int)iconFrom.getOutputPoints().get(0).getX(), (int)iconFrom.getOutputPoints().get(0).getY(),
-//                           (int) iconTo.getInputPoints().get(0).getX(), (int)iconTo.getInputPoints().get(0).getY());
-//                }
-//        }
+        for (IconMain iconFrom : connections.keySet()) {
+                Set<IconMain> set = connections.get(iconFrom);
+                for(IconMain iconTo: set){
+                   g.drawLine((int)iconFrom.getOutputPoints().get(0).getX(), (int)iconFrom.getOutputPoints().get(0).getY(),
+                           (int) iconTo.getInputPoints().get(0).getX(), (int)iconTo.getInputPoints().get(0).getY());
+                }
+        }
 
     }
     /*************************************************************************************
@@ -119,10 +118,10 @@ public class WorkingPanel extends JPanel {
 
         this.addMouseListener(new MouseAdapter() {
           boolean isOutputClicked = false;
-          @Override
+            IconMain outputIcon=null;
+            @Override
           public void mouseClicked(MouseEvent e) {
               super.mouseClicked(e);
-              IconMain outputIcon=null;
               for (IconMain icon : iconList.keySet()) {
                   ArrayList<Point> outputs = icon.getOutputPoints();
                   int output_x1;
@@ -160,10 +159,6 @@ public class WorkingPanel extends JPanel {
                                       set.add(icon);
                                       connections.put(outputIcon,set);
                                   }
-//                                 .............. Work in Progress .........
-//                                  System.out.println("conn "+connections.size());
-//                                  for (Icons icono : connections.keySet()) {
-//                                  }
                                   repaint();
                                   break;
                               }
