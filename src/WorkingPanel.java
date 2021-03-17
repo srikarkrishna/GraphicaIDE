@@ -12,6 +12,7 @@ import icons.Icons;
 public class WorkingPanel extends JPanel {
 
     HashMap<Icons,String> iconList = new HashMap<>();
+    public boolean isCloseParenthesis, isOpenParenthesis;
     public WorkingPanel() {
         addIconActionListeners();
     }

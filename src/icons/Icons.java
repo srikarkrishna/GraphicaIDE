@@ -18,8 +18,9 @@ public abstract class Icons implements Icon, java.io.Serializable {
     String iconType;
     int X, Y;
 
-    protected ArrayList<Integer> inputPoints;
-    protected ArrayList<Integer> outputPoints;
+    protected ArrayList<Point> inputPoints;
+    protected ArrayList<Point> outputPoints;
+
 //    int inputPoint_X;
 //    int inputPoint_Y;
 
@@ -31,11 +32,11 @@ public abstract class Icons implements Icon, java.io.Serializable {
         return Y;
     }
 
-    public ArrayList<Integer> getInputPoints() {
+    public ArrayList<Point> getInputPoints() {
         return inputPoints;
     }
 
-    public ArrayList<Integer> getOutputPoints() {
+    public ArrayList<Point> getOutputPoints() {
         return outputPoints;
     }
 
@@ -49,7 +50,6 @@ public abstract class Icons implements Icon, java.io.Serializable {
 
 
     public Icons(){
-
     }
     /*************************************************************************************
      *  - Method Name: draw()

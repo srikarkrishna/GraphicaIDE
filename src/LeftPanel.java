@@ -64,4 +64,13 @@ public class LeftPanel extends JPanel {
 
     }
 
+    public static void disableButtons(String iconText){
+        if (iconText.equals("(")){
+            iconsArray[0].setEnabled(false);
+        }
+        else if(iconText.equals(")")){
+            iconsArray[1].setEnabled(false);
+        }
+    }
+
 }

@@ -13,15 +13,18 @@ public class CloseParenthesisIcon extends Icons {
     int inputPoint_X,inputPoint_Y;
 
     public CloseParenthesisIcon(){
-
         inputPoints = new ArrayList<>();
-        outputPoints = new ArrayList<>();
+        //outputPoints = new ArrayList<>();
 
-        this.inputPoint_X = super.X + 10;
-        this.inputPoint_Y = super.Y + 18;
+        inputPoint_X = super.getX() + 10;
+        inputPoint_Y = super.getX() + 18;
 
-        inputPoints.add(inputPoint_X);
-        inputPoints.add(inputPoint_Y);
+        inputPoints.add(new Point(x+10,y+18));
+      //  inputPoints.add(inputPoint_Y);
+
+        System.out.println("CONSTRUCTOR CALLED");
+        System.out.println(inputPoint_X);
+        System.out.println(inputPoint_Y);
 
     }
     /*************************************************************************************

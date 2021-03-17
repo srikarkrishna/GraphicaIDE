@@ -1,11 +1,7 @@
-import icons.BarsIcon;
-import icons.IconBase;
 import icons.Icons;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -71,7 +67,9 @@ public class AppMain extends JFrame{
      *  - Desc: Action listeners to the icon buttons in the left panel
      ***************************************************************************************/
     public void addPanelActionListeners(){
+
         iconBase = new IconBase();
+
         JButton []iconsArray = LeftPanel.getIconsArray();
         for (JButton button : iconsArray) {
             button.addMouseListener(new MouseAdapter() {
@@ -79,21 +77,20 @@ public class AppMain extends JFrame{
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
                     selectedIconText = button.getText();
-                    icon = iconBase.getIconObject(button.getText());
                 }
             });
 
-            button.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    super.mousePressed(e);
-                    selectedIconText = button.getText();
-                    icon = iconBase.getIconObject(button.getText());
-                    icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - 80),
-                            (int) (MouseInfo.getPointerInfo().getLocation().getY() - 130));
-                    repaint();
-                }
-            });
+//            button.addMouseListener(new MouseAdapter() {
+//                @Override
+//                public void mousePressed(MouseEvent e) {
+//                    super.mousePressed(e);
+//                    selectedIconText = button.getText();
+//                    icon = iconBase.getIconObject(button.getText(), tab);
+//                    icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - 80),
+//                            (int) (MouseInfo.getPointerInfo().getLocation().getY() - 130));
+//                    repaint();
+//                }
+//            });
 
             button.addMouseListener(new MouseAdapter() {
                 @Override
@@ -101,23 +98,9 @@ public class AppMain extends JFrame{
                     super.mouseReleased(e);
                     int tabIndex = jTabbedPane.getSelectedIndex();
                     WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
-                    if(tab.getMousePosition()!=null) {
-                        selectedIconText = button.getText();
-                        icon = iconBase.getIconObject(button.getText());
-                        System.out.println("e.getX" + " " + e.getX() + " e.getY" + " " + e.getY());
-//                    System.out.println("tab.popup.getX" + " " + tab.getMousePosition().getX());
-//                    System.out.println("e.getXOnScreen" + " " + e.getXOnScreen());
-//                    System.out.println("MouseInfo.getPointerInfo().getLocation().getX()" + " " + MouseInfo.getPointerInfo().getLocation().getX());
-//                    System.out.println("MouseInfo.getPointerInfo().getLocation().x" + " " + MouseInfo.getPointerInfo().getLocation().x);
+                    addIconToTab(tab,button);
+                    tab.repaint();
 
-                        icon.setX((int) tab.getMousePosition().getX() - Icons.width / 2);
-                        icon.setY((int) tab.getMousePosition().getY() - Icons.height / 2);
-
-                        tab.iconList.put(icon,"");
-//                    icon.draw(tab.getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX()-320),
-//                            (int) (MouseInfo.getPointerInfo().getLocation().getY())-160);
-                        tab.repaint();
-                    }
                 }
             });
 
@@ -126,9 +109,15 @@ public class AppMain extends JFrame{
                 public void mouseDragged(MouseEvent e) {
                     super.mouseDragged(e);
                     selectedIconText = button.getText();
-                    icon = iconBase.getIconObject(button.getText());
-                    icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - button.getWidth() / 3),
-                            (int) (MouseInfo.getPointerInfo().getLocation().getY() - button.getHeight() / 3));
+
+                    int tabIndex = jTabbedPane.getSelectedIndex();
+                    WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
+
+                    icon = iconBase.getIconObject(button.getText(), tab);
+                    if (icon != null) {
+                        icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - button.getWidth() / 3),
+                                (int) (MouseInfo.getPointerInfo().getLocation().getY() - button.getHeight() / 3));
+                    }
                     repaint();
                 }
             });
@@ -168,6 +157,27 @@ public class AppMain extends JFrame{
         });
         buttonSave.addActionListener(new SaveFileManager(this));
         buttonLoad.addActionListener(new LoadFileManager(this));
+
+    }
+
+    public void addIconToTab(WorkingPanel tab,JButton button){
+
+        String selectedIconText = button.getText();
+        icon = iconBase.getIconObject(selectedIconText,tab);
+
+        if (selectedIconText.equals("(")){
+            tab.isOpenParenthesis = true;
+        }
+        else if (selectedIconText.equals(")")){
+            tab.isCloseParenthesis = true;
+        }
+
+        if (icon != null) {
+            icon.setX((int) tab.getMousePosition().getX() - Icons.width / 2);
+            icon.setY((int) tab.getMousePosition().getY() - Icons.height / 2);
+            tab.iconList.put(icon, "");
+
+        }
 
     }
 
