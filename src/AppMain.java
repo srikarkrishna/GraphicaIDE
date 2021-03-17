@@ -125,12 +125,15 @@ public class AppMain extends JFrame{
         JButton buttonNewTab = new JButton("New Tab");
         JButton buttonLoad = new JButton("Load");
         JButton buttonSave = new JButton("Save");
+        JButton buttonCompile = new JButton("Compile");
         menuBar.add(buttonNewTab);
         menuBar.add(buttonLoad);
         menuBar.add(buttonSave);
+        menuBar.add(buttonCompile);
         buttonNewTab.setPreferredSize(new Dimension(150,40));
         buttonLoad.setPreferredSize(new Dimension(150,40));
         buttonSave.setPreferredSize(new Dimension(150,40));
+        buttonCompile.setPreferredSize(new Dimension(150,40));
         buttonNewTab.addActionListener(e -> {
             String tabName = "Space ";
             Random rand = new Random();
@@ -146,6 +149,7 @@ public class AppMain extends JFrame{
         });
         buttonSave.addActionListener(new SaveFileManager(this));
         buttonLoad.addActionListener(new LoadFileManager(this));
+        buttonCompile.addActionListener(new Compile (this));
 
     }
     /*************************************************************************************
