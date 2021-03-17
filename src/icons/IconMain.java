@@ -1,10 +1,7 @@
 package icons;
 
 import interfaces.Icon;
-
-import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 /*************************************************************************************
@@ -13,16 +10,13 @@ import java.util.ArrayList;
  *  - Creation Date : 03/05/2021
  *  - Desc: Describe the abstract Icons class to build each icon class and to track the icons connected in the workspace.
  ***************************************************************************************/
-public abstract class Icons implements Icon, java.io.Serializable {
+public abstract class IconMain implements Icon, java.io.Serializable {
     public static int width = 160, height=50;
     String iconType;
     int X, Y;
 
     protected ArrayList<Point> inputPoints;
     protected ArrayList<Point> outputPoints;
-
-//    int inputPoint_X;
-//    int inputPoint_Y;
 
     public int getX() {
         return X;
@@ -49,7 +43,7 @@ public abstract class Icons implements Icon, java.io.Serializable {
     }
 
 
-    public Icons(){
+    public IconMain(){
     }
     /*************************************************************************************
      *  - Method Name: draw()

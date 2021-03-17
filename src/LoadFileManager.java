@@ -43,10 +43,7 @@ class LoadFileManager implements ActionListener {
                 fileInStream = new FileInputStream(fileName);
                 objectInStream = new ObjectInputStream(fileInStream);
                 tabsToOpen = (Component[]) objectInStream.readObject();
-
-//                StoreClickPoints.link1=null;
-//                StoreClickPoints.link2=null;
-                mainFrame.workingPanelArray = new ArrayList<WorkingPanel>();
+                mainFrame.workingPanelArray = new ArrayList<>();
                 int i = 1;
                 mainFrame.jTabbedPane.removeAll();
                 for (Component component : tabsToOpen) {
@@ -56,7 +53,6 @@ class LoadFileManager implements ActionListener {
                     panel.repaint();
                     i++;
                 }
-
             }
             if (objectInStream != null) {
                 objectInStream.close();

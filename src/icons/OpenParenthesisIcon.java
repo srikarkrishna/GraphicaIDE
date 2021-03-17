@@ -1,13 +1,14 @@
 package icons;
 
 import java.awt.*;
-import interfaces.Icon;
+import java.util.ArrayList;
 
-public class OpenParenthesisIcon extends Icons {
+public class OpenParenthesisIcon extends IconMain {
     private static final String iconType = "(";
-//    int width = 160,height=50;
     int x,y;
+    int outputPoint_X,outputPoint_Y;
     public OpenParenthesisIcon(){
+        outputPoints = new ArrayList<>();
     }
     /*************************************************************************************
      *  - Method Name: draw()
@@ -18,8 +19,10 @@ public class OpenParenthesisIcon extends Icons {
      *  - Desc: Describe the Open Parenthesis icon to draw on the GUI
      ***************************************************************************************/
     public void draw(Graphics g, int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.outputPoint_X = x + width - 20;
+        this.outputPoint_Y = y + 18;
+        outputPoints.clear();
+        outputPoints.add(new Point(outputPoint_X,outputPoint_Y));
         g.drawRect(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
         g.drawOval(x + width - 20, y + 18, 10, 10);

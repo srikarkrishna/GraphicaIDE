@@ -1,5 +1,4 @@
-import icons.Icons;
-
+import icons.IconMain;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -12,7 +11,7 @@ public class AppMain extends JFrame{
     LeftPanel lPanel;
     JTabbedPane jTabbedPane;
     JMenuBar menuBar;
-    Icons icon;
+    IconMain icon;
     String selectedIconText;
     static int tabIndex=2;
     IconBase iconBase;
@@ -80,26 +79,16 @@ public class AppMain extends JFrame{
                 }
             });
 
-//            button.addMouseListener(new MouseAdapter() {
-//                @Override
-//                public void mousePressed(MouseEvent e) {
-//                    super.mousePressed(e);
-//                    selectedIconText = button.getText();
-//                    icon = iconBase.getIconObject(button.getText(), tab);
-//                    icon.draw(getGraphics(), (int) (MouseInfo.getPointerInfo().getLocation().getX() - 80),
-//                            (int) (MouseInfo.getPointerInfo().getLocation().getY() - 130));
-//                    repaint();
-//                }
-//            });
-
             button.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     super.mouseReleased(e);
                     int tabIndex = jTabbedPane.getSelectedIndex();
                     WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
-                    addIconToTab(tab,button);
-                    tab.repaint();
+                    if(tab.getMousePosition()!=null) {
+                        addIconToTab(tab, button);
+                        tab.repaint();
+                    }
 
                 }
             });
@@ -159,9 +148,15 @@ public class AppMain extends JFrame{
         buttonLoad.addActionListener(new LoadFileManager(this));
 
     }
-
+    /*************************************************************************************
+     *  - Method Name: addIconToTab()
+     *  - Input Parameters : WorkingPanel tab, JButton button.
+     *  - Return Type :none
+     *  - Author : Samarth
+     *  - Creation Date : 03/13/2021
+     *  - Desc: Add icons into the working panel after they are dropped.
+     ***************************************************************************************/
     public void addIconToTab(WorkingPanel tab,JButton button){
-
         String selectedIconText = button.getText();
         icon = iconBase.getIconObject(selectedIconText,tab);
 
@@ -173,17 +168,15 @@ public class AppMain extends JFrame{
         }
 
         if (icon != null) {
-            icon.setX((int) tab.getMousePosition().getX() - Icons.width / 2);
-            icon.setY((int) tab.getMousePosition().getY() - Icons.height / 2);
+            icon.setX((int) tab.getMousePosition().getX() - IconMain.width / 2);
+            icon.setY((int) tab.getMousePosition().getY() - IconMain.height / 2);
             tab.iconList.put(icon, "");
-
         }
-
     }
 
     public static void main(String[] args)
     {
-        JFrame jframe = new AppMain(windowTitle);
+        new AppMain(windowTitle);
     }
 
 }

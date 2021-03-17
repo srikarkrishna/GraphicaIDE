@@ -1,11 +1,9 @@
 package icons;
 
 import java.awt.*;
-import interfaces.Icon;
 
-public class LoopIcon extends Icons {
+public class LoopIcon extends IconMain {
     private static final String iconType = "@";
-//    int width = 160,height=50;
     int x,y;
     public LoopIcon(){
     }

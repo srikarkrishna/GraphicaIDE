@@ -18,14 +18,12 @@ import javax.swing.JTabbedPane;
 public class SaveFileManager implements ActionListener {
     private String fileName;
     private AppMain mainFrame;
-
     public SaveFileManager(AppMain mainFrame){
         this.mainFrame = mainFrame;
     }
-
     public void actionPerformed(ActionEvent e) {
-        FileOutputStream fileOutStream = null;
-        ObjectOutputStream objectOutStream = null;
+        FileOutputStream fileOutStream;
+        ObjectOutputStream objectOutStream;
         Component[] tabs = mainFrame.jTabbedPane.getComponents();
         try {
             JFileChooser chosenFile = new JFileChooser();

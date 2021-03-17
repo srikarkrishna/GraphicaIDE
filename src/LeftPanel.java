@@ -1,10 +1,5 @@
-import icons.*;
-import interfaces.Icon;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 
 public class LeftPanel extends JPanel {
@@ -57,13 +52,19 @@ public class LeftPanel extends JPanel {
         JButton bars = new JButton("||");
         iconsArray[6] = bars;
 
-
         for (JButton jButton : iconsArray) {
             this.add(jButton.getText(), jButton);
         }
 
     }
-
+    /*************************************************************************************
+     *  - Method Name: disableButtons()
+     *  - Input Parameters : String iconText
+     *  - Return Type :none
+     *  - Authors : Samarth
+     *  - Creation Date : 03/13/2021
+     *  - Desc: disable open and close parenthesis icons in the left panel when they are used once.
+     ***************************************************************************************/
     public static void disableButtons(String iconText){
         if (iconText.equals("(")){
             iconsArray[0].setEnabled(false);
