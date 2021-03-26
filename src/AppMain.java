@@ -1,12 +1,14 @@
 import icons.IconMain;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class AppMain extends JFrame{
+public class AppMain extends JFrame implements ActionListener {
     final static String windowTitle = "GRAPHICAL IDE";
     LeftPanel lPanel;
     JTabbedPane jTabbedPane;
@@ -17,6 +19,7 @@ public class AppMain extends JFrame{
     IconFactory iconBase;
     JSplitPane horizontalPane;
     JSplitPane verticalPane;
+    FileManager fileManager;
     public static ArrayList<WorkingPanel> workingPanelArray;
     /*************************************************************************************
      *  - public Constructor
@@ -30,14 +33,13 @@ public class AppMain extends JFrame{
         jTabbedPane = new JTabbedPane();
         createWorkSpace();
         menuBar = new JMenuBar();
-        addMenu();
+        addMenuItems();
         horizontalPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, lPanel, jTabbedPane);
         verticalPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuBar, horizontalPane);
         horizontalPane.setResizeWeight(0.2);
         verticalPane.setEnabled(false);
         verticalPane.setResizeWeight(0.03);
         add(verticalPane);
-        menuBar.setBackground(Color.BLUE);
         setSize(1280, 720);
         setVisible(true);
         setResizable(true);
@@ -113,28 +115,19 @@ public class AppMain extends JFrame{
         }
     }
     /*************************************************************************************
-     *  - Method Name: addMenu()
+     *  - Method Name: createMenuBar()
      *  - Input Parameters : none
      *  - Return Type :none
      *  - Author : Sulabh
      *  - Creation Date : 03/06/2021
      *  - Desc: Adds buttons and action listeners of them in the menu panel.
      ***************************************************************************************/
-    private void addMenu(){
+    private void addMenuItems(){
         menuBar.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JButton buttonNewTab = new JButton("New Tab");
-        JButton buttonLoad = new JButton("Load");
-        JButton buttonSave = new JButton("Save");
-        JButton buttonCompile = new JButton("Compile");
-        menuBar.add(buttonNewTab);
-        menuBar.add(buttonLoad);
-        menuBar.add(buttonSave);
-        menuBar.add(buttonCompile);
-        buttonNewTab.setPreferredSize(new Dimension(150,40));
-        buttonLoad.setPreferredSize(new Dimension(150,40));
-        buttonSave.setPreferredSize(new Dimension(150,40));
-        buttonCompile.setPreferredSize(new Dimension(150,40));
-        buttonNewTab.addActionListener(e -> {
+        menuBar.setBackground(Color.BLUE);
+        JMenuItem newTabButton = new JMenuItem("New Tab");
+        newTabButton.addActionListener(e ->
+        {
             String tabName = "Space ";
             Random rand = new Random();
             float r = rand.nextFloat();
@@ -147,10 +140,35 @@ public class AppMain extends JFrame{
             workingPanel.setBackground(backgroundColor);
             jTabbedPane.add(tabName, workingPanel);
         });
-        buttonSave.addActionListener(new SaveFileManager(this));
-        buttonLoad.addActionListener(new LoadFileManager(this));
-        buttonCompile.addActionListener(new Compile (this));
-
+        JMenuItem saveButton = new JMenuItem("Save");
+        fileManager = new FileManager(this);
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileManager.saveFile();
+            }
+        });
+        JMenuItem loadButton = new JMenuItem("Load");
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileManager.loadFile();
+            }
+        });
+        JMenuItem compileButton = new JMenuItem("Compile");
+        compileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        newTabButton.setPreferredSize(new Dimension(150,40));
+        loadButton.setPreferredSize(new Dimension(150,40));
+        saveButton.setPreferredSize(new Dimension(150,40));
+        compileButton.setPreferredSize(new Dimension(150,40));
+        menuBar.add(newTabButton);
+        menuBar.add(saveButton);
+        menuBar.add(loadButton);
+        menuBar.add(compileButton);
     }
     /*************************************************************************************
      *  - Method Name: addIconToTab()
@@ -183,4 +201,8 @@ public class AppMain extends JFrame{
         new AppMain(windowTitle);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
