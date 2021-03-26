@@ -22,9 +22,10 @@ public class HyphenIcon extends IconMain {
         outputPoints.clear();
         inputPoints.add(new Point(x+10,y+18));
         outputPoints.add(new Point(x+width-15,y+18));
-        g.drawRect(x,y,width,height);
+        //g.drawRect(x,y,width,height);
+        g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
-        g.drawOval(x + 10, y + 18, 10, 10);
-        g.drawOval(x + width - 15, y + 18, 10, 10);
+        //g.drawOval(x + 10, y + 18, 10, 10);
+        //g.drawOval(x + width - 15, y + 18, 10, 10);
     }
 }

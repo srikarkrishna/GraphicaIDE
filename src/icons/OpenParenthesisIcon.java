@@ -22,8 +22,9 @@ public class OpenParenthesisIcon extends IconMain {
         this.outputPoint_Y = y + 18;
         outputPoints.clear();
         outputPoints.add(new Point(outputPoint_X,outputPoint_Y));
-        g.drawRect(x,y,width,height);
+        //g.drawRect(x,y,width,height);
+        g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
-        g.drawOval(x + width - 20, y + 18, 10, 10);
+        //g.drawOval(x + width - 20, y + 18, 10, 10);
     }
 }

@@ -23,9 +23,10 @@ public class CloseParenthesisIcon extends IconMain {
         inputPoint_Y = y + 18;
         inputPoints.clear();
         inputPoints.add(new Point(inputPoint_X,inputPoint_Y));
-        g.drawRect(x,y,width,height);
+        //g.drawRect(x,y,width,height);
+        g.drawOval(x, y, width, height);
         g.drawString(iconType, x+width/2, y+height/2);
-        g.drawOval(x + 10, y + 18, 10, 10);
+        //g.drawOval(x + 10, y + 18, 10, 10);
 
     }
 
