@@ -31,7 +31,6 @@ public class AppMain extends JFrame implements ActionListener {
         setTitle(title);
         lPanel = new LeftPanel();
         jTabbedPane = new JTabbedPane();
-        createWorkSpace();
         menuBar = new JMenuBar();
         addMenuItems();
         horizontalPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, lPanel, jTabbedPane);
@@ -47,6 +46,7 @@ public class AppMain extends JFrame implements ActionListener {
         verticalPane.resetToPreferredSizes();
         horizontalPane.resetToPreferredSizes();
         addPanelActionListeners();
+        createWorkSpace();
     }
 
 
@@ -58,6 +58,14 @@ public class AppMain extends JFrame implements ActionListener {
         WorkingPanel workingPanel = new WorkingPanel();
         jTabbedPane.add("Space 1", workingPanel);
         workingPanel.setBackground(Color.ORANGE);
+       // WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
+//        icon = iconBase.getIconObject("(",workingPanel);
+//        icon = iconBase.getIconObject(")",workingPanel);
+        addIconToTab(workingPanel, "(");
+        addIconToTab(workingPanel, ")");
+
+
+
     }
     /*************************************************************************************
      *  - Method Name: addPanelActionListeners()
@@ -88,7 +96,7 @@ public class AppMain extends JFrame implements ActionListener {
                     int tabIndex = jTabbedPane.getSelectedIndex();
                     WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
                     if(tab.getMousePosition()!=null) {
-                        addIconToTab(tab, button);
+                        addIconToTab(tab, button.getText());
                         tab.repaint();
                     }
 
@@ -139,6 +147,8 @@ public class AppMain extends JFrame implements ActionListener {
             WorkingPanel workingPanel = new WorkingPanel();
             workingPanel.setBackground(backgroundColor);
             jTabbedPane.add(tabName, workingPanel);
+            addIconToTab(workingPanel, "(");
+            addIconToTab(workingPanel, ")");
         });
         JMenuItem saveButton = new JMenuItem("Save");
         fileManager = new FileManager(this);
@@ -178,21 +188,29 @@ public class AppMain extends JFrame implements ActionListener {
      *  - Creation Date : 03/13/2021
      *  - Desc: Add icons into the working panel after they are dropped.
      ***************************************************************************************/
-    public void addIconToTab(WorkingPanel tab,JButton button){
-        String selectedIconText = button.getText();
+    public void addIconToTab(WorkingPanel tab, String selectedIconText){
         icon = iconBase.getIconObject(selectedIconText,tab);
 
-        if (selectedIconText.equals("(")){
-            tab.isOpenParenthesis = true;
-        }
-        else if (selectedIconText.equals(")")){
-            tab.isCloseParenthesis = true;
-        }
-
+//        if (selectedIconText.equals("(")){
+//            tab.isOpenParenthesis = true;
+//        }
+//        else if (selectedIconText.equals(")")){
+//            tab.isCloseParenthesis = true;
+//        }
         if (icon != null) {
-            icon.setX((int) tab.getMousePosition().getX() - IconMain.width / 2);
-            icon.setY((int) tab.getMousePosition().getY() - IconMain.height / 2);
-            tab.iconList.put(icon, "");
+            if (selectedIconText.equals("(")) {
+                icon.setX(60);
+                icon.setY(60);
+                tab.iconList.put(icon, "");
+            } else if (selectedIconText.equals(")")) {
+                icon.setX(700);
+                icon.setY(500);
+                tab.iconList.put(icon, "");
+            } else {
+                icon.setX((int) tab.getMousePosition().getX() - IconMain.width / 2);
+                icon.setY((int) tab.getMousePosition().getY() - IconMain.height / 2);
+                tab.iconList.put(icon, "");
+            }
         }
     }
 

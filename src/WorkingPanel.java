@@ -12,6 +12,7 @@ public class WorkingPanel extends JPanel {
     HashMap<IconMain, String> iconList = new HashMap<>();
     HashMap<IconMain, Set<IconMain>> connections = new HashMap<>();
     public WorkingPanel() {
+
         addIconActionListeners();
     }
     /*************************************************************************************
@@ -26,7 +27,6 @@ public class WorkingPanel extends JPanel {
         super.paintComponent(g);
         for (IconMain icon : iconList.keySet()) {
             icon.draw(g, icon.getX(), icon.getY());
-
         }
         for (IconMain iconFrom : connections.keySet()) {
                 Set<IconMain> set = connections.get(iconFrom);

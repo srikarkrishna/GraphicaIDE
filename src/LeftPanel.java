@@ -8,7 +8,7 @@ public class LeftPanel extends JPanel {
         return iconsArray;
     }
 
-    private static final JButton[] iconsArray = new JButton[8];
+    private static final JButton[] iconsArray = new JButton[6];
     GridLayout iconLayout = new GridLayout(8,1);
 
     /*************************************************************************************
@@ -31,29 +31,29 @@ public class LeftPanel extends JPanel {
      ***************************************************************************************/
     public void initializeIcons(){
 
-        JButton openBracket = new RoundButton("(");
-        iconsArray[0] = openBracket;
-
-        JButton closeBracket = new RoundButton(")");
-        iconsArray[1] = closeBracket;
+//        JButton openBracket = new RoundButton("(");
+//        iconsArray[0] = openBracket;
+//
+//        JButton closeBracket = new RoundButton(")");
+//        iconsArray[1] = closeBracket;
 
         JButton lessThan = new RoundButton("<");
-        iconsArray[2] = lessThan;
+        iconsArray[0] = lessThan;
 
         JButton greaterThan = new RoundButton(">");
-        iconsArray[3] = greaterThan;
+        iconsArray[1] = greaterThan;
 
         JButton atTheRate = new RoundButton("@");
-        iconsArray[4] = atTheRate;
+        iconsArray[2] = atTheRate;
 
         JButton hyphen = new RoundButton("-");
-        iconsArray[5] = hyphen;
+        iconsArray[3] = hyphen;
 
         JButton bars = new RoundButton("|-");
-        iconsArray[6] = bars;
+        iconsArray[4] = bars;
 
         JButton multipleOutputBars = new RoundButton("-|");
-        iconsArray[7] = multipleOutputBars;
+        iconsArray[5] = multipleOutputBars;
 
         for (JButton jButton : iconsArray) {
             this.add(jButton.getText(), jButton);
