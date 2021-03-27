@@ -8,8 +8,8 @@ public class LeftPanel extends JPanel {
         return iconsArray;
     }
 
-    private static final JButton[] iconsArray = new JButton[7];
-    GridLayout iconLayout = new GridLayout(7,1);
+    private static final JButton[] iconsArray = new JButton[8];
+    GridLayout iconLayout = new GridLayout(8,1);
 
     /*************************************************************************************
      *  - public Constructor
@@ -31,26 +31,29 @@ public class LeftPanel extends JPanel {
      ***************************************************************************************/
     public void initializeIcons(){
 
-        JButton openBracket = new JButton("(");
+        JButton openBracket = new RoundButton("(");
         iconsArray[0] = openBracket;
 
-        JButton closeBracket = new JButton(")");
+        JButton closeBracket = new RoundButton(")");
         iconsArray[1] = closeBracket;
 
-        JButton lessThan = new JButton("<");
+        JButton lessThan = new RoundButton("<");
         iconsArray[2] = lessThan;
 
-        JButton greaterThan = new JButton(">");
+        JButton greaterThan = new RoundButton(">");
         iconsArray[3] = greaterThan;
 
-        JButton atTheRate = new JButton("@");
+        JButton atTheRate = new RoundButton("@");
         iconsArray[4] = atTheRate;
 
-        JButton hyphen = new JButton("-");
+        JButton hyphen = new RoundButton("-");
         iconsArray[5] = hyphen;
 
-        JButton bars = new JButton("||");
+        JButton bars = new RoundButton("|-");
         iconsArray[6] = bars;
+
+        JButton multipleOutputBars = new RoundButton("-|");
+        iconsArray[7] = multipleOutputBars;
 
         for (JButton jButton : iconsArray) {
             this.add(jButton.getText(), jButton);

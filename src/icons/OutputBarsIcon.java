@@ -2,9 +2,9 @@ package icons;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class BarsIcon extends IconMain {
-    private static final String iconType = "| -";
-    public BarsIcon(){
+public class OutputBarsIcon extends IconMain {
+    private static final String iconType = "- |";
+    public OutputBarsIcon(){
         inputPoints = new ArrayList<>();
         outputPoints = new ArrayList<>();
     }
@@ -14,7 +14,7 @@ public class BarsIcon extends IconMain {
      *  - Return Type :void
      *  - Author : Sneha
      *  - Creation Date : 03/05/2021
-     *  - Desc: Describe the bars icon with multiple input to draw on the GUI
+     *  - Desc: Describe the bars icon with multiple outputs to draw on the GUI
      ***************************************************************************************/
     @Override
     public void draw(Graphics g, int x, int y) {

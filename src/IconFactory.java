@@ -10,8 +10,10 @@ public class IconFactory {
      ***************************************************************************************/
     public IconMain getIconObject(String iconType, WorkingPanel tab){
         IconMain icon = null;
-        if (iconType.equals("||")) {
+        if (iconType.equals("|-")) {
           icon =  new BarsIcon();
+        } else if (iconType.equals("-|")) {
+            icon =  new OutputBarsIcon();
         } else if (iconType.equals(")") && !tab.isCloseParenthesis) {
             icon =  new CloseParenthesisIcon();
             LeftPanel.disableButtons(iconType);
