@@ -118,7 +118,7 @@ public class AppMain extends JFrame implements ActionListener {
      *  - Method Name: createMenuBar()
      *  - Input Parameters : none
      *  - Return Type :none
-     *  - Author : Sulabh
+     *  - Author : Sulabh, Sneha
      *  - Creation Date : 03/06/2021
      *  - Desc: Adds buttons and action listeners of them in the menu panel.
      ***************************************************************************************/

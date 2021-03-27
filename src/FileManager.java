@@ -4,6 +4,13 @@ import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Sneha
+ * @since 03-13-2020
+ *
+ *
+ */
 public class FileManager {
     private AppMain mainFrame;
     private String fileName;
@@ -11,6 +18,13 @@ public class FileManager {
     public FileManager(AppMain mainFrame){
         this.mainFrame = mainFrame;
     }
+    /*************************************************************************************
+     *  - Method Name: saveFile()
+     *  - Return Type :none
+     *  - Authors : Keshav
+     *  - Creation Date : 03/13/2021
+     *  - Desc: Method to save the workspace
+     ***************************************************************************************/
     public void saveFile(){
         FileOutputStream fileOutStream;
         ObjectOutputStream objectOutStream;
@@ -37,6 +51,13 @@ public class FileManager {
         }
     }
 
+    /*************************************************************************************
+     *  - Method Name: loadFile()
+     *  - Return Type :none
+     *  - Authors : Sneha
+     *  - Creation Date : 03/13/2021
+     *  - Desc: Method to load the workspace
+     ***************************************************************************************/
     public void loadFile(){
         FileInputStream fileInStream = null;
         ObjectInputStream objectInStream = null;
