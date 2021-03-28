@@ -7,7 +7,7 @@ public class OpenParenthesisIcon extends IconMain {
     private static final String iconType = "(";
     int outputPoint_X,outputPoint_Y;
     public OpenParenthesisIcon(){
-        outputPoints = new ArrayList<>();
+        totalOutputs = 1;
     }
     /*************************************************************************************
      *  - Method Name: draw()
@@ -18,11 +18,9 @@ public class OpenParenthesisIcon extends IconMain {
      *  - Desc: Describe the Open Parenthesis icon to draw on the GUI
      ***************************************************************************************/
     public void draw(Graphics g, int x, int y) {
-        this.outputPoint_X = x + width - 20;
-        this.outputPoint_Y = y + 18;
-        outputPoints.clear();
-        outputPoints.add(new Point(outputPoint_X,outputPoint_Y));
-        //g.drawRect(x,y,width,height);
+        this.outputPoint_X = x + width;
+        this.outputPoint_Y = y + height/2;
+        outputPoint = new Point(outputPoint_X,outputPoint_Y);
         g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
         //g.drawOval(x + width - 20, y + 18, 10, 10);

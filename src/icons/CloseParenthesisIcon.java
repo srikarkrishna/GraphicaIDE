@@ -7,7 +7,7 @@ public class CloseParenthesisIcon extends IconMain {
     private static final String iconType = ")";
     int inputPoint_X,inputPoint_Y;
     public CloseParenthesisIcon(){
-        inputPoints = new ArrayList<>();
+        totalInputs = 1;
     }
     /*************************************************************************************
      *  - Method Name: draw()
@@ -19,10 +19,11 @@ public class CloseParenthesisIcon extends IconMain {
      ***************************************************************************************/
     @Override
     public void draw(Graphics g, int x, int y) {
-        inputPoint_X = x + 10;
-        inputPoint_Y = y + 18;
-        inputPoints.clear();
-        inputPoints.add(new Point(inputPoint_X,inputPoint_Y));
+        this.inputPoint_X = x ;
+        this.inputPoint_Y = y + height/2;
+        inputPoint = new Point(inputPoint_X,inputPoint_Y);
+//        inputPoints.clear();
+        //inputPoints.add(new Point(inputPoint_X,inputPoint_Y));
         //g.drawRect(x,y,width,height);
         g.drawOval(x, y, width, height);
         g.drawString(iconType, x+width/2, y+height/2);

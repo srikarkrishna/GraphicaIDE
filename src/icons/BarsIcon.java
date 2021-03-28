@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class BarsIcon extends IconMain {
     private static final String iconType = "| -";
     public BarsIcon(){
-        inputPoints = new ArrayList<>();
-        outputPoints = new ArrayList<>();
+//        inputPoints = new ArrayList<>();
+//        outputPoints = new ArrayList<>();
     }
     /*************************************************************************************
      *  - Method Name: draw()
@@ -18,10 +18,10 @@ public class BarsIcon extends IconMain {
      ***************************************************************************************/
     @Override
     public void draw(Graphics g, int x, int y) {
-        inputPoints.clear();
-        outputPoints.clear();
-        inputPoints.add(new Point(x+10,y+10));
-        outputPoints.add(new Point(x+width-20,y+10));
+//        inputPoints.clear();
+//        outputPoints.clear();
+//        inputPoints.add(new Point(x+10,y+10));
+//        outputPoints.add(new Point(x+width-20,y+10));
 //        g.drawRect(x,y,width,height);
         g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);

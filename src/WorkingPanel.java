@@ -31,8 +31,9 @@ public class WorkingPanel extends JPanel {
         for (IconMain iconFrom : connections.keySet()) {
                 Set<IconMain> set = connections.get(iconFrom);
                 for(IconMain iconTo: set){
-                   g.drawLine((int)iconFrom.getOutputPoints().get(0).getX(), (int)iconFrom.getOutputPoints().get(0).getY(),
-                           (int) iconTo.getInputPoints().get(0).getX(), (int)iconTo.getInputPoints().get(0).getY());
+                   g.drawLine((int)iconFrom.getOutputPoint().getX(), (int)iconFrom.getOutputPoint().getY(),
+                           (int)iconTo.getInputPoint().getX(), (int)iconTo.getInputPoint().getY());
+                   g.drawRect((int)iconTo.getInputPoint().getX(), (int)iconTo.getInputPoint().getY(),10,10);
                 }
         }
 
@@ -45,8 +46,23 @@ public class WorkingPanel extends JPanel {
      *  - Creation Date : 03/14/2021
      *  - Desc: Check if a given point is inside the rectangle.
      ***************************************************************************************/
-    public boolean isInsideRectangle(int rect_x1, int rect_y1, int rect_x2, int rect_y2, int point_x, int point_y) {
-        return (point_x > rect_x1 && point_x < rect_x2) && (point_y > rect_y1 && point_y < rect_y2);
+    public boolean isInsideRectangle(int h, int k, int point_x, int point_y) {
+        h += 80;
+        k += 25;
+        int a = 80;
+        int b = 25;
+        double p = Math.pow(point_x - h, 2) / Math.pow(a, 2) + (Math.pow((point_y - k), 2) / Math.pow(b, 2));
+//        System.out.println("p= "+p );
+//        if (p > 1) {
+//            System.out.println("Outside");
+//        }
+//        else if (p == 1) {
+//            System.out.println("On the ellipse");
+//        }
+//        else {
+//            System.out.println("Inside");
+//        }
+          return p <= 1;
     }
 
 
@@ -71,7 +87,7 @@ public class WorkingPanel extends JPanel {
                     int icon_x2 = icon.getX() + IconMain.width;
                     int icon_y1 = icon.getY();
                     int icon_y2 = icon.getY() + IconMain.height;
-                    if (isInsideRectangle(icon_x1, icon_y1, icon_x2, icon_y2, point_x, point_y)) {
+                    if (isInsideRectangle(icon.getX(), icon.getY(), e.getX(),e.getY())) {
                         icon.setX(e.getX() - IconMain.width / 2);
                         icon.setY(e.getY() - IconMain.height / 2);
                     }
@@ -94,7 +110,7 @@ public class WorkingPanel extends JPanel {
                         int icon_x2 = icon.getX() + IconMain.width;
                         int icon_y1 = icon.getY();
                         int icon_y2 = icon.getY() + IconMain.height;
-                        if (isInsideRectangle(icon_x1, icon_y1, icon_x2, icon_y2, point_x, point_y)) {
+                        if (isInsideRectangle(icon.getX(), icon.getY(), e.getX(),e.getY())) {
                             String name = JOptionPane.showInputDialog("Enter Value", value);
                             iconList.put(icon, name);
                         }
@@ -118,57 +134,71 @@ public class WorkingPanel extends JPanel {
 
         this.addMouseListener(new MouseAdapter() {
           boolean isOutputClicked = false;
+          boolean isInputClicked = false;
             IconMain outputIcon=null;
+            IconMain inputIcon=null;
             @Override
           public void mouseClicked(MouseEvent e) {
               super.mouseClicked(e);
-              for (IconMain icon : iconList.keySet()) {
-                  ArrayList<Point> outputs = icon.getOutputPoints();
-                  int output_x1;
-                  int output_y1;
-
-                  if (outputs != null) {
-                      for (Point outputPoint : outputs) {
-                          output_x1 = (int) outputPoint.getX();
-                          output_y1 = (int) outputPoint.getY();
-                          if (isInsideRectangle(output_x1 - 10, output_y1 - 10, output_x1 + 10, output_y1 + 10, e.getX(), e.getY())) {
-                              outputIcon =icon;
-                              isOutputClicked = true;
-                              break;
-                          }
-
-                      }
+              if(!isOutputClicked){
+              for (IconMain oIcon : iconList.keySet()) {
+                //  Point outputPoint = icon.getOutputPoint();
+                  if (isInsideRectangle(oIcon.getX(), oIcon.getY(), e.getX(),e.getY())) {
+                      outputIcon =oIcon;
+                      isOutputClicked = true;
+                  }
+                  System.out.println(inputIcon+" "+outputIcon);
                   }
               }
-              if (isOutputClicked) {
-                  for (IconMain icon : iconList.keySet()) {
-                      int input_x1;
-                      int input_y1;
-                      ArrayList<Point> inputs = icon.getInputPoints();
-                      if (inputs != null) {
-                          for (Point inputPoint : inputs) {
-                              input_x1 = (int) inputPoint.getX();
-                              input_y1 = (int) inputPoint.getY();
+              else{
+                  isInputClicked = true;
+              }
+              if (isOutputClicked && isInputClicked) {
+                  for (IconMain iIcon : iconList.keySet()) {
 
-                              if (isInsideRectangle(input_x1 - 10, input_y1 - 10, input_x1 + 10, input_y1 + 10, e.getX(), e.getY())) {
-                                  if(connections.containsKey(outputIcon)){
-                                      connections.get(outputIcon).add(icon);
-                                  }
-                                  else {
-                                      Set<IconMain> set = new HashSet<>();
-                                      set.add(icon);
-                                      connections.put(outputIcon,set);
-                                  }
-                                  repaint();
-                                  break;
-                              }
-                          }
+                      if (isInsideRectangle(iIcon.getX(), iIcon.getY(), e.getX(),e.getY())) {
+                          inputIcon = iIcon;
+                          System.out.println(inputIcon+" "+outputIcon);
+                          isConnectionValid(outputIcon,inputIcon);
+                          isInputClicked = false;
+                          isOutputClicked = false;
+//                          if(connections.containsKey(outputIcon)){
+//                              connections.get(outputIcon).add(icon);
+//                          }
+//                          else {
+//                              Set<IconMain> set = new HashSet<>();
+//                              set.add(icon);
+//                              connections.put(outputIcon,set);
+//                          }
+//                          repaint();
+//                          break;
                       }
+
                   }
               }
           }
 
         });
+    }
+
+    private void isConnectionValid(IconMain outputIcon, IconMain inputIcon) {
+        System.out.println(" Heelllooo");
+        if(outputIcon.getTotalOutputs()>0 && inputIcon.getTotalInputs()>0){
+
+            if(connections.containsKey(outputIcon)) {
+                          connections.get(outputIcon).add(inputIcon);
+            }
+            else {
+                  Set<IconMain> set = new HashSet<>();
+                  set.add(inputIcon);
+                  connections.put(outputIcon,set);
+            }
+            outputIcon.setTotalOutputs(outputIcon.getTotalOutputs()-1);
+            inputIcon.setTotalInputs(inputIcon.getTotalInputs()-1);
+            repaint();
+            System.out.println(connections.size());
+
+        }
     }
 }
 

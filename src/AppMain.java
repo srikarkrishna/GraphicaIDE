@@ -152,12 +152,7 @@ public class AppMain extends JFrame implements ActionListener {
         });
         JMenuItem saveButton = new JMenuItem("Save");
         fileManager = new FileManager(this);
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                fileManager.saveFile();
-            }
-        });
+        saveButton.addActionListener(e -> fileManager.saveFile());
         JMenuItem loadButton = new JMenuItem("Load");
         loadButton.addActionListener(new ActionListener() {
             @Override

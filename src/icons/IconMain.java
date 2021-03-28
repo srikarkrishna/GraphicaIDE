@@ -11,13 +11,16 @@ import java.util.ArrayList;
  *  - Desc: Describe the abstract Icons class to build each icon class and to track the icons connected in the workspace.
  ***************************************************************************************/
 public abstract class IconMain implements Icon, java.io.Serializable {
-    private static final long serialVersionUID  = 2206216124611366299L;
     public static int width = 160, height=50;
     String iconType;
     int X, Y;
 
-    protected ArrayList<Point> inputPoints;
-    protected ArrayList<Point> outputPoints;
+
+    protected int totalInputs;
+    protected int totalOutputs;
+    protected Point outputPoint;
+    protected Point inputPoint;
+
 
     public int getX() {
         return X;
@@ -27,12 +30,28 @@ public abstract class IconMain implements Icon, java.io.Serializable {
         return Y;
     }
 
-    public ArrayList<Point> getInputPoints() {
-        return inputPoints;
+    public int getTotalInputs() {
+        return totalInputs;
     }
 
-    public ArrayList<Point> getOutputPoints() {
-        return outputPoints;
+    public int getTotalOutputs() {
+        return totalOutputs;
+    }
+
+    public Point getOutputPoint() {
+        return outputPoint;
+    }
+
+    public Point getInputPoint() {
+        return inputPoint;
+    }
+
+    public void setTotalInputs(int totalInputs) {
+        this.totalInputs = totalInputs;
+    }
+
+    public void setTotalOutputs(int totalOutputs) {
+        this.totalOutputs = totalOutputs;
     }
 
     public void setX(int x) {

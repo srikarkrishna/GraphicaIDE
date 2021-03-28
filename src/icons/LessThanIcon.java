@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class LessThanIcon extends IconMain {
     private static final String iconType = "<";
     public LessThanIcon(){
-        inputPoints = new ArrayList<>();
-        outputPoints = new ArrayList<>();
+//        inputPoints = new ArrayList<>();
+//        outputPoints = new ArrayList<>();
     }
     /*************************************************************************************
      *  - Method Name: draw()
@@ -18,11 +18,11 @@ public class LessThanIcon extends IconMain {
      *  - Desc: Describe the Less than icon to draw on the GUI
      ***************************************************************************************/
     public void draw(Graphics g, int x, int y) {
-        inputPoints.clear();
-        outputPoints.clear();
-        inputPoints.add(new Point(x+10,y+18));
-        outputPoints.add(new Point(x+width-15,y+5));
-        outputPoints.add(new Point(x+width-15,y+35));
+//        inputPoints.clear();
+//        outputPoints.clear();
+//        inputPoints.add(new Point(x+10,y+18));
+//        outputPoints.add(new Point(x+width-15,y+5));
+//        outputPoints.add(new Point(x+width-15,y+35));
         //g.drawRect(x,y,width,height);
         g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
