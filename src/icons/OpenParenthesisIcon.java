@@ -4,14 +4,14 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class OpenParenthesisIcon extends IconMain {
-    private static final String iconType = "(";
     int outputPoint_X,outputPoint_Y;
     public OpenParenthesisIcon(){
+        iconType = "(";
         totalOutputs = 1;
     }
     /*************************************************************************************
      *  - Method Name: draw()
-     *  - Input Parameters : Graphic object, int X, int Y
+     *  - Input Parameters : Graphic object, int X, int Yo
      *  - Return Type :void
      *  - Author : Keshav
      *  - Creation Date : 03/05/2021

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  ***************************************************************************************/
 public abstract class IconMain implements Icon, java.io.Serializable {
     public static int width = 160, height=50;
-    String iconType;
+    public String iconType;
     int X, Y;
 
 

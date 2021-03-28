@@ -52,17 +52,7 @@ public class WorkingPanel extends JPanel {
         int a = 80;
         int b = 25;
         double p = Math.pow(point_x - h, 2) / Math.pow(a, 2) + (Math.pow((point_y - k), 2) / Math.pow(b, 2));
-//        System.out.println("p= "+p );
-//        if (p > 1) {
-//            System.out.println("Outside");
-//        }
-//        else if (p == 1) {
-//            System.out.println("On the ellipse");
-//        }
-//        else {
-//            System.out.println("Inside");
-//        }
-          return p <= 1;
+        return p <= 1;
     }
 
 
@@ -80,13 +70,7 @@ public class WorkingPanel extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 super.mouseDragged(e);
-                int point_x = e.getX();
-                int point_y = e.getY();
                 for (IconMain icon : iconList.keySet()) {
-                    int icon_x1 = icon.getX();
-                    int icon_x2 = icon.getX() + IconMain.width;
-                    int icon_y1 = icon.getY();
-                    int icon_y2 = icon.getY() + IconMain.height;
                     if (isInsideRectangle(icon.getX(), icon.getY(), e.getX(),e.getY())) {
                         icon.setX(e.getX() - IconMain.width / 2);
                         icon.setY(e.getY() - IconMain.height / 2);
@@ -102,14 +86,8 @@ public class WorkingPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (isAlreadyOneClick) {
-                    int point_x = e.getX();
-                    int point_y = e.getY();
                     for (IconMain icon : iconList.keySet()) {
                         String value = iconList.get(icon);
-                        int icon_x1 = icon.getX();
-                        int icon_x2 = icon.getX() + IconMain.width;
-                        int icon_y1 = icon.getY();
-                        int icon_y2 = icon.getY() + IconMain.height;
                         if (isInsideRectangle(icon.getX(), icon.getY(), e.getX(),e.getY())) {
                             String name = JOptionPane.showInputDialog("Enter Value", value);
                             iconList.put(icon, name);
@@ -155,23 +133,14 @@ public class WorkingPanel extends JPanel {
               }
               if (isOutputClicked && isInputClicked) {
                   for (IconMain iIcon : iconList.keySet()) {
-
                       if (isInsideRectangle(iIcon.getX(), iIcon.getY(), e.getX(),e.getY())) {
                           inputIcon = iIcon;
                           System.out.println(inputIcon+" "+outputIcon);
-                          isConnectionValid(outputIcon,inputIcon);
+                          if(inputIcon!=outputIcon) {
+                              isConnectionValid(outputIcon, inputIcon);
+                          }
                           isInputClicked = false;
                           isOutputClicked = false;
-//                          if(connections.containsKey(outputIcon)){
-//                              connections.get(outputIcon).add(icon);
-//                          }
-//                          else {
-//                              Set<IconMain> set = new HashSet<>();
-//                              set.add(icon);
-//                              connections.put(outputIcon,set);
-//                          }
-//                          repaint();
-//                          break;
                       }
 
                   }
@@ -182,19 +151,22 @@ public class WorkingPanel extends JPanel {
     }
 
     private void isConnectionValid(IconMain outputIcon, IconMain inputIcon) {
-        System.out.println(" Heelllooo");
+        System.out.println("HELOOOOOO");
         if(outputIcon.getTotalOutputs()>0 && inputIcon.getTotalInputs()>0){
-
             if(connections.containsKey(outputIcon)) {
-                          connections.get(outputIcon).add(inputIcon);
+                connections.get(outputIcon).add(inputIcon);
             }
             else {
-                  Set<IconMain> set = new HashSet<>();
-                  set.add(inputIcon);
-                  connections.put(outputIcon,set);
+                Set<IconMain> set = new HashSet<>();
+                set.add(inputIcon);
+                connections.put(outputIcon,set);
             }
-            outputIcon.setTotalOutputs(outputIcon.getTotalOutputs()-1);
-            inputIcon.setTotalInputs(inputIcon.getTotalInputs()-1);
+            if (!outputIcon.iconType.equals("- |")){
+                outputIcon.setTotalOutputs(outputIcon.getTotalOutputs()-1);
+            }
+            if (!inputIcon.iconType.equals("| -")){
+                inputIcon.setTotalInputs(inputIcon.getTotalInputs()-1);
+            }
             repaint();
             System.out.println(connections.size());
 

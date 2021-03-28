@@ -11,7 +11,7 @@ public class IconFactory {
     public IconMain getIconObject(String iconType, WorkingPanel tab){
         IconMain icon = null;
         if (iconType.equals("|-")) {
-          icon =  new BarsIcon();
+          icon =  new InputBarsIcon();
         } else if (iconType.equals("-|")) {
             icon =  new OutputBarsIcon();
         } else if (iconType.equals(")") && !tab.isCloseParenthesis) {

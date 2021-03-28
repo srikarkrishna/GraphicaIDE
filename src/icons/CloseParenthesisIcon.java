@@ -4,9 +4,10 @@ import java.awt.*;
 import java.util.*;
 public class CloseParenthesisIcon extends IconMain {
 
-    private static final String iconType = ")";
     int inputPoint_X,inputPoint_Y;
     public CloseParenthesisIcon(){
+
+        iconType = ")";
         totalInputs = 1;
     }
     /*************************************************************************************

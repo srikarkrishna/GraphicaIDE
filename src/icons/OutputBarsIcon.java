@@ -3,10 +3,12 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class OutputBarsIcon extends IconMain {
-    private static final String iconType = "- |";
+    int inputPoint_X,inputPoint_Y;
+    int outputPoint_X,outputPoint_Y;
     public OutputBarsIcon(){
-//        inputPoints = new ArrayList<>();
-//        outputPoints = new ArrayList<>();
+        iconType = "- |";
+        totalOutputs = Integer.MAX_VALUE;
+        totalInputs = 1;
     }
     /*************************************************************************************
      *  - Method Name: draw()
@@ -18,11 +20,15 @@ public class OutputBarsIcon extends IconMain {
      ***************************************************************************************/
     @Override
     public void draw(Graphics g, int x, int y) {
-//        inputPoints.clear();
-//        outputPoints.clear();
-//        inputPoints.add(new Point(x+10,y+10));
-//        outputPoints.add(new Point(x+width-20,y+10));
-//        g.drawRect(x,y,width,height);
+
+        this.inputPoint_X = x ;
+        this.inputPoint_Y = y + height/2;
+        inputPoint = new Point(inputPoint_X,inputPoint_Y);
+
+        this.outputPoint_X = x + width;
+        this.outputPoint_Y = y + height/2;
+        outputPoint = new Point(outputPoint_X,outputPoint_Y);
+
         g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
 //        g.fillRect(x + 10, y + 10, 10, height - 20);
