@@ -45,6 +45,8 @@ public class AppMain extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         verticalPane.resetToPreferredSizes();
         horizontalPane.resetToPreferredSizes();
+        horizontalPane.setEnabled(false);
+        verticalPane.setEnabled(false);
         addPanelActionListeners();
         createWorkSpace();
     }
