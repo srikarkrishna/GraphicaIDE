@@ -219,20 +219,23 @@ public class AppMain extends JFrame implements ActionListener {
         // should return whether all shapes are connected or not
         // left to implement
         // allShapesConnected()
+//        System.out.println(connections);
         for (IconMain iconFrom : connections.keySet()) {
             if(iconFrom.iconType.equals("@")){
                boolean looped = isLoopExist(iconFrom,iconFrom,connections);
                visited.clear();
-               System.out.println("looped= "+looped);
+//               System.out.println("looped= "+looped);
                if(looped){
                    iconFrom.setColor(Color.BLACK);
                }
                else{
                    iconFrom.setColor(Color.RED);
                }
-               repaint();
             }
         }
+        areConnectionsValid(connections);
+        repaint();
+
     }
     public boolean isLoopExist(IconMain compareTo, IconMain iconFrom, HashMap<IconMain, Set<IconMain>> connections) {
 //        System.out.println("looped");
@@ -260,6 +263,54 @@ public class AppMain extends JFrame implements ActionListener {
             }
     }
         return false;
+    }
+
+    public void areConnectionsValid(HashMap<IconMain, Set<IconMain>> connections){
+        ArrayList<String> errors = new ArrayList<String>();
+        String errorDialog = "";
+        Set<String> errorSet = new HashSet<String>();
+
+        // Iterating through all connections and adding error messages as well as changing colors
+
+        try {
+            for (IconMain iconFrom : connections.keySet()) {
+                Set<IconMain> set = connections.get(iconFrom);
+                if (iconFrom.getTotalOutputs() != 0){
+                    iconFrom.setColor(Color.RED);
+                    String msg = "Icon " + iconFrom.iconType +" "+ "has not completed all outputs" ;
+                    errors.add(msg);
+                }
+                if (iconFrom.getTotalInputs() != 0){
+                    iconFrom.setColor(Color.RED);
+                    String msg = "Icon " +  iconFrom.iconType +" "+ "has not completed all inputs" ;
+                    errors.add(msg);
+                }
+                for(IconMain iconTo: set){
+                    if (iconTo.getTotalInputs() != 0){
+                        iconTo.setColor(Color.RED);
+                        String msg = "Icon " + iconTo.iconType +" "+ "has not completed all inputs" ;
+                        errors.add(msg);
+                    }
+                    if (iconTo.getTotalOutputs() != 0){
+                        iconTo.setColor(Color.RED);
+                        String msg = "Icon " + iconTo.iconType +" "+ "has not completed all outputs" ;
+                        errors.add(msg);
+                    }
+                }
+            }
+        }
+        catch (NullPointerException e){
+            System.out.println(e);
+        }
+        // Adding all the errors (including the duplicate ones to a set)
+        errorSet.addAll(errors);
+        // Adding the error messages to a String so that we can display all errors in one dialog box
+        for(String msg:errorSet){
+            errorDialog = errorDialog + msg + ", \n";
+        }
+        System.out.println(errorDialog);
+        JOptionPane.showMessageDialog(this, errorDialog);
+
     }
 
     public static void main(String[] args)
