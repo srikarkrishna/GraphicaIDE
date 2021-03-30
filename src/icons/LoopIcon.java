@@ -27,7 +27,6 @@ public class LoopIcon extends IconMain {
         this.inputPoint_Y = y + height/2;
         inputPoint = new Point(inputPoint_X,inputPoint_Y);
         g.setColor(color);
-        //System.out.println("Came here with color"+color);
         g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
 

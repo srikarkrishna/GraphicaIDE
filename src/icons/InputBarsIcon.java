@@ -29,7 +29,5 @@ public class InputBarsIcon extends IconMain {
         g.setColor(color);
         g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
-//        g.fillRect(x + 10, y + 10, 10, height - 20);
-//        g.fillRect(x + width - 20, y + 10, 10, height - 20);
     }
 }

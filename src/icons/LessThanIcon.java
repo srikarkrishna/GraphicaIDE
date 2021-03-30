@@ -29,8 +29,5 @@ public class LessThanIcon extends IconMain {
         g.setColor(color);
         g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
-        //g.drawOval(x + 10, y + 18, 10, 10);
-        //g.drawOval(x + width - 15, y + 5, 10, 10);
-        //g.drawOval(x + width - 15, y + 35, 10, 10);
     }
 }
