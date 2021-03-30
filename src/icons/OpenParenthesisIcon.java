@@ -1,7 +1,6 @@
 package icons;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class OpenParenthesisIcon extends IconMain {
     int outputPoint_X,outputPoint_Y;
@@ -22,6 +21,7 @@ public class OpenParenthesisIcon extends IconMain {
         this.outputPoint_X = x + width;
         this.outputPoint_Y = y + height/2;
         outputPoint = new Point(outputPoint_X,outputPoint_Y);
+        g.setColor(color);
         g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
         //g.drawOval(x + width - 20, y + 18, 10, 10);

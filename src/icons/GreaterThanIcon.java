@@ -1,7 +1,6 @@
 package icons;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class GreaterThanIcon  extends IconMain {
     int outputPoint_X,outputPoint_Y;
@@ -27,6 +26,7 @@ public class GreaterThanIcon  extends IconMain {
         this.inputPoint_X = x ;
         this.inputPoint_Y = y + height/2;
         inputPoint = new Point(inputPoint_X,inputPoint_Y);
+        g.setColor(color);
         g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
         //g.drawOval(x + 5, y + 5, 10, 10);

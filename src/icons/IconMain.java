@@ -2,7 +2,6 @@ package icons;
 
 import interfaces.Icon;
 import java.awt.*;
-import java.util.ArrayList;
 
 /*************************************************************************************
  *  - public Class
@@ -20,6 +19,12 @@ public abstract class IconMain implements Icon, java.io.Serializable {
     protected int totalOutputs;
     protected Point outputPoint;
     protected Point inputPoint;
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    protected Color color = Color.black;
 
 
     public int getX() {

@@ -1,7 +1,7 @@
 package icons;
 
 import java.awt.*;
-import java.util.*;
+
 public class CloseParenthesisIcon extends IconMain {
 
     int inputPoint_X,inputPoint_Y;
@@ -24,6 +24,7 @@ public class CloseParenthesisIcon extends IconMain {
         this.inputPoint_X = x ;
         this.inputPoint_Y = y + height/2;
         inputPoint = new Point(inputPoint_X,inputPoint_Y);
+        g.setColor(color);
         g.drawOval(x, y, width, height);
         g.drawString(iconType, x+width/2, y+height/2);
     }

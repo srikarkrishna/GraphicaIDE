@@ -20,7 +20,6 @@ public class AppMain extends JFrame implements ActionListener {
     JSplitPane verticalPane;
     FileManager fileManager;
     Set<IconMain> visited;
-    boolean loopCheck = false;
     public static ArrayList<WorkingPanel> workingPanelArray;
     /*************************************************************************************
      *  - public Constructor
@@ -167,7 +166,7 @@ public class AppMain extends JFrame implements ActionListener {
         compileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                visited = new HashSet<IconMain>();
+                visited = new HashSet<>();
                 int selectedIndex = jTabbedPane.getSelectedIndex();
                 WorkingPanel workingPanel = (WorkingPanel) jTabbedPane.getComponent(selectedIndex);
                 compileTab(workingPanel.getConnections());
@@ -216,27 +215,28 @@ public class AppMain extends JFrame implements ActionListener {
         }
     }
 
-    public Boolean compileTab(HashMap<IconMain, Set<IconMain>> connections){
+    public void compileTab(HashMap<IconMain, Set<IconMain>> connections){
         // should return whether all shapes are connected or not
         // left to implement
         // allShapesConnected()
         for (IconMain iconFrom : connections.keySet()) {
-            Set<IconMain> set = connections.get(iconFrom);
-            for(IconMain iconTo: set) {
-
-            }
             if(iconFrom.iconType.equals("@")){
                boolean looped = isLoopExist(iconFrom,iconFrom,connections);
                visited.clear();
                System.out.println("looped= "+looped);
+               if(looped){
+                   iconFrom.setColor(Color.BLACK);
+               }
+               else{
+                   iconFrom.setColor(Color.RED);
+               }
+               repaint();
             }
         }
-
-        return false;
     }
     public boolean isLoopExist(IconMain compareTo, IconMain iconFrom, HashMap<IconMain, Set<IconMain>> connections) {
 //        System.out.println("looped");
-        boolean temp = false;
+        boolean loopSeen = false;
 //        System.out.println("Start=" + iconFrom);
         if(connections.containsKey(iconFrom)){
         Set<IconMain> set = connections.get(iconFrom);
@@ -251,10 +251,10 @@ public class AppMain extends JFrame implements ActionListener {
                 } else {
                     if (!visited.contains(iconTo)) {
                         visited.add(iconTo);
-                        temp = temp || isLoopExist(compareTo, iconTo, connections);
+                        loopSeen = isLoopExist(compareTo, iconTo, connections);
                     }
                 }
-                if(temp){
+                if(loopSeen){
                     return true;
                 }
             }
