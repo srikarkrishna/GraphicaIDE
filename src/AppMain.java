@@ -266,7 +266,6 @@ public class AppMain extends JFrame implements ActionListener {
     }
 
     public void areConnectionsValid(HashMap<IconMain, Set<IconMain>> connections){
-        ArrayList<String> errors = new ArrayList<String>();
         String errorDialog = "";
         Set<String> errorSet = new HashSet<String>();
 
@@ -278,32 +277,30 @@ public class AppMain extends JFrame implements ActionListener {
                 if (iconFrom.getTotalOutputs() != 0){
                     iconFrom.setColor(Color.RED);
                     String msg = "Icon " + iconFrom.iconType +" "+ "has not completed all outputs" ;
-                    errors.add(msg);
+                    errorSet.add(msg);
                 }
                 if (iconFrom.getTotalInputs() != 0){
                     iconFrom.setColor(Color.RED);
                     String msg = "Icon " +  iconFrom.iconType +" "+ "has not completed all inputs" ;
-                    errors.add(msg);
+                    errorSet.add(msg);
                 }
                 for(IconMain iconTo: set){
                     if (iconTo.getTotalInputs() != 0){
                         iconTo.setColor(Color.RED);
                         String msg = "Icon " + iconTo.iconType +" "+ "has not completed all inputs" ;
-                        errors.add(msg);
+                        errorSet.add(msg);
                     }
                     if (iconTo.getTotalOutputs() != 0){
                         iconTo.setColor(Color.RED);
                         String msg = "Icon " + iconTo.iconType +" "+ "has not completed all outputs" ;
-                        errors.add(msg);
+                        errorSet.add(msg);
                     }
                 }
             }
         }
-        catch (NullPointerException e){
+        catch (Exception e){
             System.out.println(e);
         }
-        // Adding all the errors (including the duplicate ones to a set)
-        errorSet.addAll(errors);
         // Adding the error messages to a String so that we can display all errors in one dialog box
         for(String msg:errorSet){
             errorDialog = errorDialog + msg + ", \n";
