@@ -24,6 +24,5 @@ public class OpenParenthesisIcon extends IconMain {
         g.setColor(color);
         g.drawOval(x,y,width,height);
         g.drawString(iconType, x+width/2, y+height/2);
-        //g.drawOval(x + width - 20, y + 18, 10, 10);
     }
 }
