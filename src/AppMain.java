@@ -140,9 +140,9 @@ public class AppMain extends JFrame implements ActionListener {
         {
             String tabName = "Space ";
             Random rand = new Random();
-            float r = rand.nextFloat();
-            float g = rand.nextFloat();
-            float b = rand.nextFloat();
+            float r = (float) (rand.nextFloat() / 2f + 0.5);
+            float g = (float) (rand.nextFloat() / 2f + 0.5);
+            float b = (float) (rand.nextFloat() / 2f + 0.5);
             Color backgroundColor = new Color(r, g, b);
             tabName += tabIndex;
             tabIndex += 1;
