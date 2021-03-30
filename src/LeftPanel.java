@@ -9,7 +9,7 @@ public class LeftPanel extends JPanel {
     }
 
     private static final JButton[] iconsArray = new JButton[6];
-    GridLayout iconLayout = new GridLayout(8,1);
+    GridLayout iconLayout = new GridLayout(6,1);
 
     /*************************************************************************************
      *  - public Constructor

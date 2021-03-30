@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *  - Desc: Describe the abstract Icons class to build each icon class and to track the icons connected in the workspace.
  ***************************************************************************************/
 public abstract class IconMain implements Icon, java.io.Serializable {
-    public static int width = 160, height=50;
+    public static int width = 160, height=70;
     public String iconType;
     int X, Y;
 

@@ -139,9 +139,9 @@ public class WorkingPanel extends JPanel {
                           if(inputIcon!=outputIcon) {
                               isConnectionValid(outputIcon, inputIcon);
                           }
-                          isInputClicked = false;
-                          isOutputClicked = false;
                       }
+                      isInputClicked = false;
+                      isOutputClicked = false;
 
                   }
               }
@@ -170,6 +170,9 @@ public class WorkingPanel extends JPanel {
             repaint();
             System.out.println(connections.size());
 
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "This connection is not valid");
         }
     }
 }
