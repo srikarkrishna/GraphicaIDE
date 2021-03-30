@@ -14,11 +14,11 @@ public class AppMain extends JFrame implements ActionListener {
     JMenuBar menuBar;
     IconMain icon;
     String selectedIconText;
-    static int tabIndex=2;
     IconFactory iconBase;
     JSplitPane horizontalPane;
     JSplitPane verticalPane;
     FileManager fileManager;
+    static int tabIndex=2;
     Set<IconMain> visited;
     public static ArrayList<WorkingPanel> workingPanelArray;
     /*************************************************************************************
@@ -36,12 +36,11 @@ public class AppMain extends JFrame implements ActionListener {
         horizontalPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, lPanel, jTabbedPane);
         verticalPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuBar, horizontalPane);
         horizontalPane.setResizeWeight(0.2);
-        verticalPane.setEnabled(false);
         verticalPane.setResizeWeight(0.03);
         add(verticalPane);
         setSize(1280, 720);
         setVisible(true);
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         verticalPane.resetToPreferredSizes();
         horizontalPane.resetToPreferredSizes();
@@ -315,6 +314,9 @@ public class AppMain extends JFrame implements ActionListener {
         }
         if (!errorDialog.equals("")){
             JOptionPane.showMessageDialog(this, errorDialog);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Compiled Successfully!");
         }
 
     }
