@@ -9,6 +9,7 @@ public class CloseParenthesisIcon extends IconMain {
 
         iconType = ")";
         totalInputs = 1;
+        totalOutputs = 0;
     }
     /*************************************************************************************
      *  - Method Name: draw()

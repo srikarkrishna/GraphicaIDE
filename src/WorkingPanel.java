@@ -10,7 +10,8 @@ public class WorkingPanel extends JPanel {
 
     public boolean isCloseParenthesis, isOpenParenthesis;
     HashMap<IconMain, String> iconList = new HashMap<>();
-    HashMap<IconMain, Set<IconMain>> connections = new HashMap<>();
+    private HashMap<IconMain, Set<IconMain>> connections = new HashMap<>();
+
     public WorkingPanel() {
 
         addIconActionListeners();
@@ -142,7 +143,6 @@ public class WorkingPanel extends JPanel {
                       }
                       isInputClicked = false;
                       isOutputClicked = false;
-
                   }
               }
           }
@@ -175,5 +175,9 @@ public class WorkingPanel extends JPanel {
             JOptionPane.showMessageDialog(this, "This connection is not valid");
         }
     }
+    public HashMap<IconMain, Set<IconMain>> getConnections() {
+        return connections;
+    }
+
 }
 

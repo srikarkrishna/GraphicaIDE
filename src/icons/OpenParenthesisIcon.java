@@ -7,6 +7,7 @@ public class OpenParenthesisIcon extends IconMain {
     int outputPoint_X,outputPoint_Y;
     public OpenParenthesisIcon(){
         iconType = "(";
+        totalInputs = 0;
         totalOutputs = 1;
     }
     /*************************************************************************************

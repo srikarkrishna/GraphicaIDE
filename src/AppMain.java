@@ -5,8 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class AppMain extends JFrame implements ActionListener {
     final static String windowTitle = "GRAPHICAL IDE";
@@ -20,6 +19,8 @@ public class AppMain extends JFrame implements ActionListener {
     JSplitPane horizontalPane;
     JSplitPane verticalPane;
     FileManager fileManager;
+    Set<IconMain> visited;
+    boolean loopCheck = false;
     public static ArrayList<WorkingPanel> workingPanelArray;
     /*************************************************************************************
      *  - public Constructor
@@ -166,6 +167,10 @@ public class AppMain extends JFrame implements ActionListener {
         compileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                visited = new HashSet<IconMain>();
+                int selectedIndex = jTabbedPane.getSelectedIndex();
+                WorkingPanel workingPanel = (WorkingPanel) jTabbedPane.getComponent(selectedIndex);
+                compileTab(workingPanel.getConnections());
             }
         });
         newTabButton.setPreferredSize(new Dimension(150,40));
@@ -209,6 +214,52 @@ public class AppMain extends JFrame implements ActionListener {
                 tab.iconList.put(icon, "");
             }
         }
+    }
+
+    public Boolean compileTab(HashMap<IconMain, Set<IconMain>> connections){
+        // should return whether all shapes are connected or not
+        // left to implement
+        // allShapesConnected()
+        for (IconMain iconFrom : connections.keySet()) {
+            Set<IconMain> set = connections.get(iconFrom);
+            for(IconMain iconTo: set) {
+
+            }
+            if(iconFrom.iconType.equals("@")){
+               boolean looped = isLoopExist(iconFrom,iconFrom,connections);
+               visited.clear();
+               System.out.println("looped= "+looped);
+            }
+        }
+
+        return false;
+    }
+    public boolean isLoopExist(IconMain compareTo, IconMain iconFrom, HashMap<IconMain, Set<IconMain>> connections) {
+//        System.out.println("looped");
+        boolean temp = false;
+//        System.out.println("Start=" + iconFrom);
+        if(connections.containsKey(iconFrom)){
+        Set<IconMain> set = connections.get(iconFrom);
+
+     //   if (){
+            for (IconMain iconTo : set) {
+//                System.out.println("IconFrom=" + iconFrom);
+//                System.out.println("IconTo=" + iconTo);
+                if (iconTo==compareTo) {
+//                    System.out.println("Came here");
+                    return true;
+                } else {
+                    if (!visited.contains(iconTo)) {
+                        visited.add(iconTo);
+                        temp = temp || isLoopExist(compareTo, iconTo, connections);
+                    }
+                }
+                if(temp){
+                    return true;
+                }
+            }
+    }
+        return false;
     }
 
     public static void main(String[] args)
