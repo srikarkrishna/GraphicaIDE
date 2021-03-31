@@ -297,6 +297,9 @@ public class AppMain extends JFrame implements ActionListener {
         }
         else {
             JOptionPane.showMessageDialog(this, "Compiled Successfully!");
+            for (IconMain icon : iconList.keySet()) {
+                icon.setColor(Color.BLACK);
+            }
         }
 
     }

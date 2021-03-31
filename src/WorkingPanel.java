@@ -39,14 +39,15 @@ public class WorkingPanel extends JPanel {
 
     }
     /*************************************************************************************
-     *  - Method Name: isInsideRectangle()
-     *  - Input Parameters : rect_x1,rect_y1,rect_x1,rect_x1, point_x, point_y
+     *  - Method Name: isInsideOval()
+     *  - Input Parameters : int h, int k, int point_x, int point_y
      *  - Return Type :boolean
      *  - Authors : Samarth
-     *  - Creation Date : 03/14/2021
-     *  - Desc: Check if a given point is inside the rectangle.
+     *  - Creation Date : 03/28/2021
+     *  - Desc: Check if a given point is inside the ellipse/oval.
+     *  - Reference - https://www.geeksforgeeks.org/check-if-a-point-is-inside-outside-or-on-the-ellipse/
      ***************************************************************************************/
-    public boolean isInsideRectangle(int h, int k, int point_x, int point_y) {
+    public boolean isInsideOval(int h, int k, int point_x, int point_y) {
         h += 80;
         k += 25;
         int a = 80;
@@ -71,7 +72,7 @@ public class WorkingPanel extends JPanel {
             public void mouseDragged(MouseEvent e) {
                 super.mouseDragged(e);
                 for (IconMain icon : iconList.keySet()) {
-                    if (isInsideRectangle(icon.getX(), icon.getY(), e.getX(),e.getY())) {
+                    if (isInsideOval(icon.getX(), icon.getY(), e.getX(),e.getY())) {
                         icon.setX(e.getX() - IconMain.width / 2);
                         icon.setY(e.getY() - IconMain.height / 2);
                     }
@@ -89,7 +90,7 @@ public class WorkingPanel extends JPanel {
                 if (isAlreadyOneClick) {
                     for (IconMain icon : iconList.keySet()) {
                         String value = iconList.get(icon);
-                        if (isInsideRectangle(icon.getX(), icon.getY(), e.getX(),e.getY())) {
+                        if (isInsideOval(icon.getX(), icon.getY(), e.getX(),e.getY())) {
                             String name = JOptionPane.showInputDialog("Enter Value", value);
                             iconList.put(icon, name);
                         }
@@ -123,7 +124,7 @@ public class WorkingPanel extends JPanel {
               super.mouseClicked(e);
               if(!isOutputClicked){
               for (IconMain oIcon : iconList.keySet()) {
-                  if (isInsideRectangle(oIcon.getX(), oIcon.getY(), e.getX(),e.getY())) {
+                  if (isInsideOval(oIcon.getX(), oIcon.getY(), e.getX(),e.getY())) {
                       outputIcon =oIcon;
                       isOutputClicked = true;
                   }
@@ -134,7 +135,7 @@ public class WorkingPanel extends JPanel {
               }
               if (isOutputClicked && isInputClicked && outputIcon!=null) {
                   for (IconMain iIcon : iconList.keySet()) {
-                      if (isInsideRectangle(iIcon.getX(), iIcon.getY(), e.getX(),e.getY())) {
+                      if (isInsideOval(iIcon.getX(), iIcon.getY(), e.getX(),e.getY())) {
                           inputIcon = iIcon;
                           if(inputIcon!=outputIcon && inputIcon!=null && outputIcon!=null) {
                               isConnectionValid(outputIcon, inputIcon);
