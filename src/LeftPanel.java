@@ -31,12 +31,6 @@ public class LeftPanel extends JPanel {
      ***************************************************************************************/
     public void initializeIcons(){
 
-//        JButton openBracket = new RoundButton("(");
-//        iconsArray[0] = openBracket;
-//
-//        JButton closeBracket = new RoundButton(")");
-//        iconsArray[1] = closeBracket;
-
         JButton lessThan = new RoundButton("<");
         iconsArray[0] = lessThan;
 
@@ -58,7 +52,6 @@ public class LeftPanel extends JPanel {
         for (JButton jButton : iconsArray) {
             this.add(jButton.getText(), jButton);
         }
-
     }
     /*************************************************************************************
      *  - Method Name: disableButtons()

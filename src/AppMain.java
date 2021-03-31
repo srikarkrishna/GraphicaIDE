@@ -59,14 +59,8 @@ public class AppMain extends JFrame implements ActionListener {
         WorkingPanel workingPanel = new WorkingPanel();
         jTabbedPane.add("Space 1", workingPanel);
         workingPanel.setBackground(Color.ORANGE);
-       // WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
-//        icon = iconBase.getIconObject("(",workingPanel);
-//        icon = iconBase.getIconObject(")",workingPanel);
         addIconToTab(workingPanel, "(");
         addIconToTab(workingPanel, ")");
-
-
-
     }
     /*************************************************************************************
      *  - Method Name: addPanelActionListeners()
@@ -190,12 +184,6 @@ public class AppMain extends JFrame implements ActionListener {
      ***************************************************************************************/
     public void addIconToTab(WorkingPanel tab, String selectedIconText){
         icon = iconBase.getIconObject(selectedIconText,tab);
-//        if (selectedIconText.equals("(")){
-//            tab.isOpenParenthesis = true;
-//        }
-//        else if (selectedIconText.equals(")")){
-//            tab.isCloseParenthesis = true;
-//        }
         if (icon != null) {
             if (selectedIconText.equals("(")) {
                 icon.setX(60);
@@ -212,12 +200,15 @@ public class AppMain extends JFrame implements ActionListener {
             }
         }
     }
-
+    /*************************************************************************************
+     *  - Method Name: compileTab()
+     *  - Input Parameters : HashMap<IconMain, Set<IconMain>> connections, WorkingPanel workingPanel
+     *  - Return Type : none
+     *  - Authors : Srikar, Sulabh
+     *  - Creation Date : 03/27/2021
+     *  - Desc: Method for compilation of connections, shows error dialog and changes color of incomplete icons
+     ***************************************************************************************/
     public void compileTab(HashMap<IconMain, Set<IconMain>> connections, WorkingPanel workingPanel){
-        // should return whether all shapes are connected or not
-        // left to implement
-        // allShapesConnected()
-//        System.out.println(connections);
         HashMap<IconMain, String> iconList = workingPanel.iconList ;
         if (connections.isEmpty()){
             JOptionPane.showMessageDialog(this, "No connection detected, connect icons to validate them.");
@@ -230,7 +221,6 @@ public class AppMain extends JFrame implements ActionListener {
             if(iconFrom.iconType.equals("@")){
                boolean looped = isLoopExist(iconFrom,iconFrom,connections);
                visited.clear();
-//               System.out.println("looped= "+looped);
                if(looped){
                    iconFrom.setColor(Color.BLACK);
                }
@@ -241,21 +231,21 @@ public class AppMain extends JFrame implements ActionListener {
         }
         areConnectionsValid(iconList);
         repaint();
-
     }
+    /*************************************************************************************
+     *  - Method Name: isLoopExist()
+     *  - Input Parameters : IconMain compareTo, IconMain iconFrom, HashMap<IconMain, Set<IconMain>> connections
+     *  - Return Type : boolean
+     *  - Authors : Srikar, Sulabh
+     *  - Creation Date : 03/27/2021
+     *  - Desc: iterates through all icons and validates them, shows error dialog and changes color of incomplete icons
+     ***************************************************************************************/
     public boolean isLoopExist(IconMain compareTo, IconMain iconFrom, HashMap<IconMain, Set<IconMain>> connections) {
-//        System.out.println("looped");
         boolean loopSeen = false;
-//        System.out.println("Start=" + iconFrom);
         if(connections.containsKey(iconFrom)){
         Set<IconMain> set = connections.get(iconFrom);
-
-     //   if (){
             for (IconMain iconTo : set) {
-//                System.out.println("IconFrom=" + iconFrom);
-//                System.out.println("IconTo=" + iconTo);
                 if (iconTo==compareTo) {
-//                    System.out.println("Came here");
                     return true;
                 } else {
                     if (!visited.contains(iconTo)) {
@@ -270,17 +260,19 @@ public class AppMain extends JFrame implements ActionListener {
         }
         return false;
     }
-
-
+    /*************************************************************************************
+     *  - Method Name: areConnectionsValid()
+     *  - Input Parameters : HashMap<IconMain, String> iconList
+     *  - Return Type :none
+     *  - Authors : Samarth, Keshav
+     *  - Creation Date : 03/28/2021
+     *  - Desc: Iterating through all connections and adding error messages as well as changes colors of icons
+     ***************************************************************************************/
     public void areConnectionsValid(HashMap<IconMain, String> iconList){
         String errorDialog = "";
         Set<String> errorSet = new HashSet<>();
-
-        // Iterating through all connections and adding error messages as well as changing colors
-
         try {
             for (IconMain iconFrom : iconList.keySet()) {
-//                Set<IconMain> set = iconList.get(iconFrom);
                 if (iconFrom.getTotalOutputs() != 0){
                     iconFrom.setColor(Color.RED);
                     String msg = "Icon " + iconFrom.iconType +" "+ "has not completed all outputs" ;
@@ -291,18 +283,6 @@ public class AppMain extends JFrame implements ActionListener {
                     String msg = "Icon " +  iconFrom.iconType +" "+ "has not completed all inputs" ;
                     errorSet.add(msg);
                 }
-//                for(IconMain iconTo: set){
-//                    if (iconTo.getTotalInputs() != 0){
-//                        iconTo.setColor(Color.RED);
-//                        String msg = "Icon " + iconTo.iconType +" "+ "has not completed all inputs" ;
-//                        errorSet.add(msg);
-//                    }
-//                    if (iconTo.getTotalOutputs() != 0){
-//                        iconTo.setColor(Color.RED);
-//                        String msg = "Icon " + iconTo.iconType +" "+ "has not completed all outputs" ;
-//                        errorSet.add(msg);
-//                    }
-//                }
             }
         }
         catch (Exception e){
@@ -328,7 +308,5 @@ public class AppMain extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
+    public void actionPerformed(ActionEvent e) { }
 }

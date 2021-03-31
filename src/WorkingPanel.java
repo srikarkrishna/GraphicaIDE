@@ -13,7 +13,6 @@ public class WorkingPanel extends JPanel {
     private HashMap<IconMain, Set<IconMain>> connections = new HashMap<>();
 
     public WorkingPanel() {
-
         addIconActionListeners();
     }
     /*************************************************************************************
@@ -56,17 +55,17 @@ public class WorkingPanel extends JPanel {
         return p <= 1;
     }
 
-
     /*************************************************************************************
      *  - Method Name: addIconActionListeners()
      *  - Input Parameters : none
      *  - Return Type :boolean
-     *  - Authors : Srikar, Sulabh
+     *  - Authors : Srikar, Sulabh, Samarth
      *  - Creation Date : 03/14/2021
-     *  - Desc: Check if a given point is inside the rectangle.
+     *  - Desc: MouseEvent Listener implemented for click, double click, and drag events of mouse
      ***************************************************************************************/
     public void addIconActionListeners() {
 
+        // MouseDrag Event listener that paints the icon which is currently being dragged in frame
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -81,6 +80,7 @@ public class WorkingPanel extends JPanel {
             }
         });
 
+        // DoubleClick Event listener to store values for a particular icon
         this.addMouseListener(new MouseAdapter() {
             boolean isAlreadyOneClick;
             @Override
@@ -111,6 +111,8 @@ public class WorkingPanel extends JPanel {
             }
         });
 
+
+        // Event listener for drawing and implementing connections between icons
         this.addMouseListener(new MouseAdapter() {
             boolean isOutputClicked = false;
              boolean isInputClicked = false;
@@ -121,12 +123,10 @@ public class WorkingPanel extends JPanel {
               super.mouseClicked(e);
               if(!isOutputClicked){
               for (IconMain oIcon : iconList.keySet()) {
-                //  Point outputPoint = icon.getOutputPoint();
                   if (isInsideRectangle(oIcon.getX(), oIcon.getY(), e.getX(),e.getY())) {
                       outputIcon =oIcon;
                       isOutputClicked = true;
                   }
-                  System.out.println(inputIcon+" "+outputIcon);
                   }
               }
               else{
@@ -136,7 +136,6 @@ public class WorkingPanel extends JPanel {
                   for (IconMain iIcon : iconList.keySet()) {
                       if (isInsideRectangle(iIcon.getX(), iIcon.getY(), e.getX(),e.getY())) {
                           inputIcon = iIcon;
-                          System.out.println(inputIcon+" "+outputIcon);
                           if(inputIcon!=outputIcon && inputIcon!=null && outputIcon!=null) {
                               isConnectionValid(outputIcon, inputIcon);
                           }
@@ -150,8 +149,15 @@ public class WorkingPanel extends JPanel {
         });
     }
 
+    /*************************************************************************************
+     *  - Method Name: isConnectionValid()
+     *  - Input Parameters : IconMain outputIcon, IconMain inputIcon
+     *  - Return Type :void
+     *  - Authors : Sneha
+     *  - Creation Date : 03/26/2021
+     *  - Desc: Checks if the selected two icons are valid for connection or not
+     ***************************************************************************************/
     private void isConnectionValid(IconMain outputIcon, IconMain inputIcon) {
-        System.out.println("HELOOOOOO");
         if(outputIcon.getTotalOutputs()>0 && inputIcon.getTotalInputs()>0){
             if(connections.containsKey(outputIcon)) {
                 connections.get(outputIcon).add(inputIcon);
@@ -168,8 +174,6 @@ public class WorkingPanel extends JPanel {
                 inputIcon.setTotalInputs(inputIcon.getTotalInputs()-1);
             }
             repaint();
-            System.out.println(connections.size());
-
         }
         else{
             JOptionPane.showMessageDialog(this, "This connection is not valid");
