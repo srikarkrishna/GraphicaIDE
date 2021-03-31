@@ -14,11 +14,11 @@ public class AppMain extends JFrame implements ActionListener {
     JMenuBar menuBar;
     IconMain icon;
     String selectedIconText;
-    static int tabIndex=2;
     IconFactory iconBase;
     JSplitPane horizontalPane;
     JSplitPane verticalPane;
     FileManager fileManager;
+    static int tabIndex=2;
     Set<IconMain> visited;
     public static ArrayList<WorkingPanel> workingPanelArray;
     /*************************************************************************************
@@ -36,12 +36,11 @@ public class AppMain extends JFrame implements ActionListener {
         horizontalPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, lPanel, jTabbedPane);
         verticalPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuBar, horizontalPane);
         horizontalPane.setResizeWeight(0.2);
-        verticalPane.setEnabled(false);
         verticalPane.setResizeWeight(0.03);
         add(verticalPane);
         setSize(1280, 720);
         setVisible(true);
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         verticalPane.resetToPreferredSizes();
         horizontalPane.resetToPreferredSizes();
@@ -60,8 +59,14 @@ public class AppMain extends JFrame implements ActionListener {
         WorkingPanel workingPanel = new WorkingPanel();
         jTabbedPane.add("Space 1", workingPanel);
         workingPanel.setBackground(Color.ORANGE);
+       // WorkingPanel tab = (WorkingPanel) jTabbedPane.getComponent(tabIndex);
+//        icon = iconBase.getIconObject("(",workingPanel);
+//        icon = iconBase.getIconObject(")",workingPanel);
         addIconToTab(workingPanel, "(");
         addIconToTab(workingPanel, ")");
+
+
+
     }
     /*************************************************************************************
      *  - Method Name: addPanelActionListeners()
@@ -185,6 +190,12 @@ public class AppMain extends JFrame implements ActionListener {
      ***************************************************************************************/
     public void addIconToTab(WorkingPanel tab, String selectedIconText){
         icon = iconBase.getIconObject(selectedIconText,tab);
+//        if (selectedIconText.equals("(")){
+//            tab.isOpenParenthesis = true;
+//        }
+//        else if (selectedIconText.equals(")")){
+//            tab.isCloseParenthesis = true;
+//        }
         if (icon != null) {
             if (selectedIconText.equals("(")) {
                 icon.setX(60);
@@ -201,15 +212,12 @@ public class AppMain extends JFrame implements ActionListener {
             }
         }
     }
-    /*************************************************************************************
-     *  - Method Name: compileTab()
-     *  - Input Parameters : HashMap<IconMain, Set<IconMain>> connections, WorkingPanel workingPanel
-     *  - Return Type :none
-     *  - Authors : Srikar, Sulabh
-     *  - Creation Date : 03/28/2021
-     *  - Desc: Method for compiling a tab, validates icon nodes and raises an error if not properly connected
-     ***************************************************************************************/
+
     public void compileTab(HashMap<IconMain, Set<IconMain>> connections, WorkingPanel workingPanel){
+        // should return whether all shapes are connected or not
+        // left to implement
+        // allShapesConnected()
+//        System.out.println(connections);
         HashMap<IconMain, String> iconList = workingPanel.iconList ;
         if (connections.isEmpty()){
             JOptionPane.showMessageDialog(this, "No connection detected, connect icons to validate them.");
@@ -222,6 +230,7 @@ public class AppMain extends JFrame implements ActionListener {
             if(iconFrom.iconType.equals("@")){
                boolean looped = isLoopExist(iconFrom,iconFrom,connections);
                visited.clear();
+//               System.out.println("looped= "+looped);
                if(looped){
                    iconFrom.setColor(Color.BLACK);
                }
@@ -234,20 +243,19 @@ public class AppMain extends JFrame implements ActionListener {
         repaint();
 
     }
-    /*************************************************************************************
-     *  - Method Name: isLoopExist()
-     *  - Input Parameters : IconMain compareTo, IconMain iconFrom, HashMap<IconMain, Set<IconMain>> connections
-     *  - Return Type : boolean
-     *  - Authors : Srikar, Sulabh
-     *  - Creation Date : 03/28/2021
-     *  - Desc: Checks if there is any loop icon in the connections, validates it and raises error if not properly looped
-     ***************************************************************************************/
     public boolean isLoopExist(IconMain compareTo, IconMain iconFrom, HashMap<IconMain, Set<IconMain>> connections) {
+//        System.out.println("looped");
         boolean loopSeen = false;
+//        System.out.println("Start=" + iconFrom);
         if(connections.containsKey(iconFrom)){
         Set<IconMain> set = connections.get(iconFrom);
+
+     //   if (){
             for (IconMain iconTo : set) {
+//                System.out.println("IconFrom=" + iconFrom);
+//                System.out.println("IconTo=" + iconTo);
                 if (iconTo==compareTo) {
+//                    System.out.println("Came here");
                     return true;
                 } else {
                     if (!visited.contains(iconTo)) {
@@ -263,20 +271,16 @@ public class AppMain extends JFrame implements ActionListener {
         return false;
     }
 
-    /*************************************************************************************
-     *  - Method Name: areConnectionsValid()
-     *  - Input Parameters : HashMap<IconMain, String> iconList
-     *  - Return Type : none
-     *  - Authors : Samarth, Keshav
-     *  - Creation Date : 03/29/2021
-     *  - Desc: Iterates through all icons present in a tab, validates the connection and raises error if not properly connected
-     ***************************************************************************************/
+
     public void areConnectionsValid(HashMap<IconMain, String> iconList){
         String errorDialog = "";
-        Set<String> errorSet = new HashSet<String>();
+        Set<String> errorSet = new HashSet<>();
+
         // Iterating through all connections and adding error messages as well as changing colors
+
         try {
             for (IconMain iconFrom : iconList.keySet()) {
+//                Set<IconMain> set = iconList.get(iconFrom);
                 if (iconFrom.getTotalOutputs() != 0){
                     iconFrom.setColor(Color.RED);
                     String msg = "Icon " + iconFrom.iconType +" "+ "has not completed all outputs" ;
@@ -287,6 +291,18 @@ public class AppMain extends JFrame implements ActionListener {
                     String msg = "Icon " +  iconFrom.iconType +" "+ "has not completed all inputs" ;
                     errorSet.add(msg);
                 }
+//                for(IconMain iconTo: set){
+//                    if (iconTo.getTotalInputs() != 0){
+//                        iconTo.setColor(Color.RED);
+//                        String msg = "Icon " + iconTo.iconType +" "+ "has not completed all inputs" ;
+//                        errorSet.add(msg);
+//                    }
+//                    if (iconTo.getTotalOutputs() != 0){
+//                        iconTo.setColor(Color.RED);
+//                        String msg = "Icon " + iconTo.iconType +" "+ "has not completed all outputs" ;
+//                        errorSet.add(msg);
+//                    }
+//                }
             }
         }
         catch (Exception e){
@@ -298,6 +314,9 @@ public class AppMain extends JFrame implements ActionListener {
         }
         if (!errorDialog.equals("")){
             JOptionPane.showMessageDialog(this, errorDialog);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Compiled Successfully!");
         }
 
     }

@@ -72,11 +72,12 @@ public class FileManager {
                 fileInStream = new FileInputStream(fileName);
                 objectInStream = new ObjectInputStream(fileInStream);
                 tabsToOpen = (Component[]) objectInStream.readObject();
-                mainFrame.workingPanelArray = new ArrayList<>();
+                mainFrame.workingPanelArray = new ArrayList<WorkingPanel>();
                 int i = 1;
                 mainFrame.jTabbedPane.removeAll();
                 for (Component component : tabsToOpen) {
-                    WorkingPanel panel = (WorkingPanel) component;
+                    WorkingPanel panel = (WorkingPanel) component ;
+                    panel.addIconActionListeners();
                     mainFrame.jTabbedPane.add("Space"+i , panel);
                     mainFrame.workingPanelArray.add(panel);
                     panel.repaint();
