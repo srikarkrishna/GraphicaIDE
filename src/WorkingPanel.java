@@ -112,8 +112,8 @@ public class WorkingPanel extends JPanel {
         });
 
         this.addMouseListener(new MouseAdapter() {
-          boolean isOutputClicked = false;
-          boolean isInputClicked = false;
+            boolean isOutputClicked = false;
+             boolean isInputClicked = false;
             IconMain outputIcon=null;
             IconMain inputIcon=null;
             @Override
@@ -132,12 +132,12 @@ public class WorkingPanel extends JPanel {
               else{
                   isInputClicked = true;
               }
-              if (isOutputClicked && isInputClicked) {
+              if (isOutputClicked && isInputClicked && outputIcon!=null) {
                   for (IconMain iIcon : iconList.keySet()) {
                       if (isInsideRectangle(iIcon.getX(), iIcon.getY(), e.getX(),e.getY())) {
                           inputIcon = iIcon;
                           System.out.println(inputIcon+" "+outputIcon);
-                          if(inputIcon!=outputIcon) {
+                          if(inputIcon!=outputIcon && inputIcon!=null && outputIcon!=null) {
                               isConnectionValid(outputIcon, inputIcon);
                           }
                       }

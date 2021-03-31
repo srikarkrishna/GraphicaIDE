@@ -274,7 +274,7 @@ public class AppMain extends JFrame implements ActionListener {
 
     public void areConnectionsValid(HashMap<IconMain, String> iconList){
         String errorDialog = "";
-        Set<String> errorSet = new HashSet<String>();
+        Set<String> errorSet = new HashSet<>();
 
         // Iterating through all connections and adding error messages as well as changing colors
 
