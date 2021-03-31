@@ -273,16 +273,37 @@ public class AppMain extends JFrame implements ActionListener {
         Set<String> errorSet = new HashSet<>();
         try {
             for (IconMain iconFrom : iconList.keySet()) {
-                if (iconFrom.getTotalOutputs() != 0){
-                    iconFrom.setColor(Color.RED);
-                    String msg = "Icon " + iconFrom.iconType +" "+ "has not completed all outputs" ;
-                    errorSet.add(msg);
+
+                if(iconFrom.iconType.equals("| -")){
+                    if (iconFrom.getTotalOutputs() != 0){
+                        iconFrom.setColor(Color.RED);
+                        String msg = "Icon " + iconFrom.iconType +" "+ "has not completed all outputs" ;
+                        errorSet.add(msg);
+                    }
                 }
-                if (iconFrom.getTotalInputs() != 0){
-                    iconFrom.setColor(Color.RED);
-                    String msg = "Icon " +  iconFrom.iconType +" "+ "has not completed all inputs" ;
-                    errorSet.add(msg);
+                else if(iconFrom.iconType.equals("- |") ){
+                    if (iconFrom.getTotalInputs() != 0){
+                        iconFrom.setColor(Color.RED);
+                        String msg = "Icon " + iconFrom.iconType +" "+ "has not completed all outputs" ;
+                        errorSet.add(msg);
+                    }
                 }
+                else{
+                    if (iconFrom.getTotalOutputs() != 0){
+                        iconFrom.setColor(Color.RED);
+                        String msg = "Icon " + iconFrom.iconType +" "+ "has not completed all outputs" ;
+                        errorSet.add(msg);
+                    }
+                    else if (iconFrom.getTotalInputs() != 0){
+                        iconFrom.setColor(Color.RED);
+                        String msg = "Icon " +  iconFrom.iconType +" "+ "has not completed all inputs" ;
+                        errorSet.add(msg);
+                    }
+                    else {
+                        iconFrom.setColor(Color.BLACK);
+                    }
+                }
+
             }
         }
         catch (Exception e){
