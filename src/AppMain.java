@@ -20,6 +20,7 @@ public class AppMain extends JFrame implements ActionListener {
     FileManager fileManager;
     static int tabIndex=2;
     Set<IconMain> visited;
+    Set<IconMain> visited1;
     public static ArrayList<WorkingPanel> workingPanelArray;
     /*************************************************************************************
      *  - public Constructor
@@ -160,6 +161,7 @@ public class AppMain extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 visited = new HashSet<>();
+                visited1 = new HashSet<>();
                 int selectedIndex = jTabbedPane.getSelectedIndex();
                 WorkingPanel workingPanel = (WorkingPanel) jTabbedPane.getComponent(selectedIndex);
                 compileTab(workingPanel.getConnections(), workingPanel);
@@ -218,6 +220,16 @@ public class AppMain extends JFrame implements ActionListener {
             }
         }
         for (IconMain iconFrom : connections.keySet()) {
+
+//            boolean val = areIconsInterconnected(iconFrom,connections);
+//            visited1.clear();
+//            System.out.println(val);
+//
+//            if (!val){
+//                iconFrom.setColor(Color.RED);
+//                System.out.println("--------");
+//            }
+
             if(iconFrom.iconType.equals("@")){
                boolean looped = isLoopExist(iconFrom,iconFrom,connections);
                visited.clear();
@@ -260,6 +272,31 @@ public class AppMain extends JFrame implements ActionListener {
         }
         return false;
     }
+
+
+//    public boolean areIconsInterconnected(IconMain iconFrom, HashMap<IconMain, Set<IconMain>> connections) {
+//        boolean loopSeen = false;
+//        if(connections.containsKey(iconFrom)){
+//            Set<IconMain> set = connections.get(iconFrom);
+//            for (IconMain iconTo : set) {
+//                if (iconTo.iconType.equals(")")) {
+//                    return true;
+//                }
+//                else {
+//                    if (!visited1.contains(iconTo)) {
+//                        visited1.add(iconTo);
+//                        loopSeen = areIconsInterconnected(iconTo, connections);
+//                    }
+//                }
+//                if(loopSeen){
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+
+
     /*************************************************************************************
      *  - Method Name: areConnectionsValid()
      *  - Input Parameters : HashMap<IconMain, String> iconList
@@ -304,6 +341,15 @@ public class AppMain extends JFrame implements ActionListener {
                     }
                 }
 
+//                boolean val = areIconsInterconnected(iconFrom,iconList);
+//                visited1.clear();
+//                System.out.println(val);
+//
+//                if (!val){
+//                    iconFrom.setColor(Color.RED);
+//                    System.out.println("--------");
+//                }
+
             }
         }
         catch (Exception e){
@@ -318,9 +364,9 @@ public class AppMain extends JFrame implements ActionListener {
         }
         else {
             JOptionPane.showMessageDialog(this, "Compiled Successfully!");
-            for (IconMain icon : iconList.keySet()) {
-                icon.setColor(Color.BLACK);
-            }
+//            for (IconMain icon : iconList.keySet()) {
+//                icon.setColor(Color.BLACK);
+//            }
         }
 
     }
