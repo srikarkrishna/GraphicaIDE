@@ -24,6 +24,10 @@ public abstract class IconMain implements Icon, java.io.Serializable {
         this.color = color;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
     protected Color color = Color.black;
 
 
