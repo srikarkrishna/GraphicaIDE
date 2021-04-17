@@ -3,10 +3,9 @@ package icons;
 import java.awt.*;
 
 public class CloseParenthesisIcon extends IconMain {
-
     int inputPoint_X,inputPoint_Y;
     public CloseParenthesisIcon(){
-
+        iconName = "closePrn_"+count;
         iconType = ")";
         totalInputs = 1;
         totalOutputs = 0;

@@ -33,7 +33,8 @@ public class WorkingPanel extends JPanel {
                 for(IconMain iconTo: set){
                    g.drawLine((int)iconFrom.getOutputPoint().getX(), (int)iconFrom.getOutputPoint().getY(),
                            (int)iconTo.getInputPoint().getX(), (int)iconTo.getInputPoint().getY());
-                   g.drawRect((int)iconTo.getInputPoint().getX(), (int)iconTo.getInputPoint().getY(),10,10);
+                   g.drawRect((int)iconTo.getInputPoint().getX(), (int)iconTo.getInputPoint().getY(),10,
+                           +10);
                 }
         }
 
@@ -137,7 +138,7 @@ public class WorkingPanel extends JPanel {
                   for (IconMain iIcon : iconList.keySet()) {
                       if (isInsideOval(iIcon.getX(), iIcon.getY(), e.getX(),e.getY())) {
                           inputIcon = iIcon;
-                          if(inputIcon!=outputIcon && inputIcon!=null && outputIcon!=null) {
+                          if(inputIcon != outputIcon && outputIcon != null) {
                               isConnectionValid(outputIcon, inputIcon);
                           }
                       }

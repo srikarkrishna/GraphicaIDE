@@ -6,6 +6,7 @@ public class LoopIcon extends IconMain {
     int outputPoint_X,outputPoint_Y;
     int inputPoint_X,inputPoint_Y;
     public LoopIcon(){
+        iconName = "loopIcn_"+count;
         iconType = "@";
         totalInputs = 2;
         totalOutputs = 2;

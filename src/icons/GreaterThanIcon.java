@@ -6,6 +6,7 @@ public class GreaterThanIcon  extends IconMain {
     int outputPoint_X,outputPoint_Y;
     int inputPoint_X,inputPoint_Y;
     public GreaterThanIcon(){
+        iconName = "greaterThan_"+count;
         iconType = ">";
         totalInputs = 2;
         totalOutputs = 1;

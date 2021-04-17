@@ -5,6 +5,7 @@ import java.awt.*;
 public class OpenParenthesisIcon extends IconMain {
     int outputPoint_X,outputPoint_Y;
     public OpenParenthesisIcon(){
+        iconName = "openPrn_"+count;
         iconType = "(";
         totalInputs = 0;
         totalOutputs = 1;

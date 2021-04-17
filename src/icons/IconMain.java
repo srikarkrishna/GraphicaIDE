@@ -12,8 +12,23 @@ import java.awt.*;
 public abstract class IconMain implements Icon, java.io.Serializable {
     public static int width = 160, height=70;
     public String iconType;
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        IconMain.count = count;
+    }
+
+    public static int count=0;
     int X, Y;
 
+    public String getIconName() {
+        return iconName;
+    }
+
+    public String iconName;
 
     protected int totalInputs;
     protected int totalOutputs;
@@ -24,12 +39,7 @@ public abstract class IconMain implements Icon, java.io.Serializable {
         this.color = color;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
     protected Color color = Color.black;
-
 
     public int getX() {
         return X;

@@ -5,6 +5,7 @@ public class OutputBarsIcon extends IconMain {
     int inputPoint_X,inputPoint_Y;
     int outputPoint_X,outputPoint_Y;
     public OutputBarsIcon(){
+        iconName = "outputBar_"+count;
         iconType = "- |";
         totalOutputs = Integer.MAX_VALUE;
         totalInputs = 1;

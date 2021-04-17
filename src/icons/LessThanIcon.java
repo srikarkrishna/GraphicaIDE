@@ -6,6 +6,7 @@ public class LessThanIcon extends IconMain {
     int outputPoint_X,outputPoint_Y;
     int inputPoint_X,inputPoint_Y;
     public LessThanIcon(){
+        iconName = "lessThan_"+count;
         iconType = "<";
         totalInputs = 1;
         totalOutputs = 2;
