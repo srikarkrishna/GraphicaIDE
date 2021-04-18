@@ -5,11 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.*;
 
 public class AppMain extends JFrame implements ActionListener {
     final static String windowTitle = "GRAPHICAL IDE";
-    LeftPanel lPanel;
+    LeftPanel leftPanel;
     JTabbedPane jTabbedPane;
     JMenuBar menuBar;
     IconMain icon;
@@ -30,11 +31,11 @@ public class AppMain extends JFrame implements ActionListener {
      ***************************************************************************************/
     public AppMain(String title) {
         setTitle(title);
-        lPanel = new LeftPanel();
+        leftPanel = new LeftPanel();
         jTabbedPane = new JTabbedPane();
         menuBar = new JMenuBar();
         addMenuItems();
-        horizontalPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, lPanel, jTabbedPane);
+        horizontalPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, jTabbedPane);
         verticalPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuBar, horizontalPane);
         horizontalPane.setResizeWeight(0.2);
         verticalPane.setResizeWeight(0.03);
@@ -148,9 +149,25 @@ public class AppMain extends JFrame implements ActionListener {
         });
         JMenuItem saveButton = new JMenuItem("Save");
         fileManager = new FileManager(this);
-        saveButton.addActionListener(e -> fileManager.saveFile());
+        saveButton.addActionListener(e -> {
+            try {
+                fileManager.saveFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (NullPointerException nullPointerException){
+                JOptionPane.showMessageDialog(null, "No file selected");
+            }
+        });
         JMenuItem loadButton = new JMenuItem("Load");
-        loadButton.addActionListener(e -> fileManager.loadFile());
+        loadButton.addActionListener(e -> {
+            try {
+                fileManager.loadFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
+        });
         JMenuItem compileButton = new JMenuItem("Compile");
         compileButton.addActionListener(e -> {
             visited = new HashSet<>();
