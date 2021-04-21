@@ -27,19 +27,19 @@ public class FileManager {
         JFileChooser chosenFile = new JFileChooser();
         int showSaveDialog = chosenFile.showSaveDialog(null);
         if (showSaveDialog == JFileChooser.APPROVE_OPTION) {
-            fileName = chosenFile.getSelectedFile().getAbsolutePath().toString() + ".ser";
+            fileName = chosenFile.getSelectedFile().getAbsolutePath() + ".ser";
         }
-        fileOutStream = new FileOutputStream(new File(fileName));
+        fileOutStream = new FileOutputStream(fileName);
         objectOutStream = new ObjectOutputStream(fileOutStream);
         objectOutStream.writeObject(tabs);
         fileOutStream.flush();
         JOptionPane.showMessageDialog(mainFrame, "Workspace saved sucessfully");
-        if (objectOutStream != null) {
+        //if (objectOutStream != null) {
             objectOutStream.close();
-        }
-        if (fileOutStream != null) {
+        //}
+        //if (fileOutStream != null) {
             fileOutStream.close();
-        }
+        //}
     }
 
     /**
@@ -59,14 +59,14 @@ public class FileManager {
             fileInStream = new FileInputStream(fileName);
             objectInStream = new ObjectInputStream(fileInStream);
             tabsToOpen = (Component[]) objectInStream.readObject();
-            mainFrame.workingPanelArray = new ArrayList<WorkingPanel>();
+            AppMain.workingPanelArray = new ArrayList<>();
             int i = 1;
             mainFrame.jTabbedPane.removeAll();
             for (Component component : tabsToOpen) {
                 WorkingPanel panel = (WorkingPanel) component;
                 panel.addIconActionListeners();
                 mainFrame.jTabbedPane.add("Space" + i, panel);
-                mainFrame.workingPanelArray.add(panel);
+                AppMain.workingPanelArray.add(panel);
                 panel.repaint();
                 i++;
             }
