@@ -9,27 +9,22 @@ public class LeftPanel extends JPanel {
     }
 
     private static final JButton[] iconsArray = new JButton[6];
-    GridLayout iconLayout = new GridLayout(6,1);
+    GridLayout iconLayout = new GridLayout(6, 1);
 
-    /*************************************************************************************
-     *  - public Constructor
-     *  - Author : Samarth
-     *  - Creation Date : 03/05/2021
-     *  - Desc: Initiating the frame and configuring the properties for the frame
-     ***************************************************************************************/
+    /**
+     * Author: Samarth
+     * Desc: Initiating the frame and configuring the properties for the frame
+     */
     public LeftPanel() {
         initializeIcons();
         setLayout(iconLayout);
     }
-    /*************************************************************************************
-     *  - Method Name: initializeIcons()
-     *  - Input Parameters : none
-     *  - Return Type :Icons
-     *  - Author : Samarth
-     *  - Creation Date : 03/07/2021
-     *  - Desc: Adds icons into the left panel.
-     ***************************************************************************************/
-    public void initializeIcons(){
+
+    /**
+     * Author: Samarth
+     * Desc: Adds icons into the left panel.
+     */
+    public void initializeIcons() {
 
         JButton lessThan = new RoundButton("<");
         iconsArray[0] = lessThan;
@@ -53,19 +48,15 @@ public class LeftPanel extends JPanel {
             this.add(jButton.getText(), jButton);
         }
     }
-    /*************************************************************************************
-     *  - Method Name: disableButtons()
-     *  - Input Parameters : String iconText
-     *  - Return Type :none
-     *  - Authors : Samarth
-     *  - Creation Date : 03/13/2021
-     *  - Desc: disable open and close parenthesis icons in the left panel when they are used once.
-     ***************************************************************************************/
-    public static void disableButtons(String iconText){
-        if (iconText.equals("(")){
+
+    /**
+     * Author: Samarth
+     * Desc: Disable open and close parenthesis icons in the left panel when they are used once.
+     */
+    public static void disableButtons(String iconText) {
+        if (iconText.equals("(")) {
             iconsArray[0].setEnabled(false);
-        }
-        else if(iconText.equals(")")){
+        } else if (iconText.equals(")")) {
             iconsArray[1].setEnabled(false);
         }
     }

@@ -5,26 +5,21 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- *
  * @author Sneha
  * @since 03-13-2020
- *
- *
  */
 public class FileManager {
     private AppMain mainFrame;
     private String fileName;
 
-    public FileManager(AppMain mainFrame){
+    public FileManager(AppMain mainFrame) {
         this.mainFrame = mainFrame;
     }
-    /*************************************************************************************
-     *  - Method Name: saveFile()
-     *  - Return Type :none
-     *  - Authors : Keshav
-     *  - Creation Date : 03/13/2021
-     *  - Desc: Method to save the workspace
-     ***************************************************************************************/
+
+    /**
+     * Author: Keshav
+     * Desc: Method to save the workspace
+     */
     public void saveFile() throws IOException {
         FileOutputStream fileOutStream;
         ObjectOutputStream objectOutStream;
@@ -47,13 +42,10 @@ public class FileManager {
         }
     }
 
-    /*************************************************************************************
-     *  - Method Name: loadFile()
-     *  - Return Type :none
-     *  - Authors : Sneha
-     *  - Creation Date : 03/13/2021
-     *  - Desc: Method to load the workspace
-     ***************************************************************************************/
+    /**
+     * Author: Sneha
+     * Desc: Method to load the workspace
+     */
     public void loadFile() throws IOException, ClassNotFoundException {
         FileInputStream fileInStream = null;
         ObjectInputStream objectInStream = null;
@@ -71,9 +63,9 @@ public class FileManager {
             int i = 1;
             mainFrame.jTabbedPane.removeAll();
             for (Component component : tabsToOpen) {
-                WorkingPanel panel = (WorkingPanel) component ;
+                WorkingPanel panel = (WorkingPanel) component;
                 panel.addIconActionListeners();
-                mainFrame.jTabbedPane.add("Space"+i , panel);
+                mainFrame.jTabbedPane.add("Space" + i, panel);
                 mainFrame.workingPanelArray.add(panel);
                 panel.repaint();
                 i++;

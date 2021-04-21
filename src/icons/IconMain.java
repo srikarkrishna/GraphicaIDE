@@ -1,16 +1,15 @@
 package icons;
 
 import interfaces.Icon;
+
 import java.awt.*;
 
-/*************************************************************************************
- *  - public Class
- *  - Author : Sneha
- *  - Creation Date : 03/05/2021
- *  - Desc: Describe the abstract Icons class to build each icon class and to track the icons connected in the workspace.
- ***************************************************************************************/
+/**
+ * Author: Sneha,
+ * Desc: Describe the abstract Icons class to build each icon class and to track the icons connected in the workspace.
+ */
 public abstract class IconMain implements Icon, java.io.Serializable {
-    public static int width = 160, height=70;
+    public static int width = 160, height = 70;
     public String iconType;
 
     public static int getCount() {
@@ -21,7 +20,7 @@ public abstract class IconMain implements Icon, java.io.Serializable {
         IconMain.count = count;
     }
 
-    public static int count=0;
+    public static int count = 0;
     int X, Y;
 
     public String getIconName() {
@@ -82,15 +81,12 @@ public abstract class IconMain implements Icon, java.io.Serializable {
     }
 
 
-    public IconMain(){
+    public IconMain() {
     }
-    /*************************************************************************************
-     *  - Method Name: draw()
-     *  - Input Parameters : Graphic object, int X, int Y
-     *  - Return Type :void
-     *  - Author : Sneha
-     *  - Creation Date : 03/05/2021
-     *  - Description : abstract method to build individual icons on the GUI
-     ***************************************************************************************/
-   public abstract void draw(Graphics g, int x, int y);
+
+    /**
+     * Author: Sneha,
+     * Desc: Abstract method to build individual icons on the GUI
+     */
+    public abstract void draw(Graphics g, int x, int y);
 }

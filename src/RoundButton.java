@@ -1,13 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
-/*************************************************************************************
- *  - public Class
- *  - Author : Sneha
- *  - Creation Date : 03/26/2021
- *  - Desc: Class to display round icons
- ***************************************************************************************/
-public class RoundButton  extends JButton {
+/**
+ * Author: Sneha,
+ * Desc: Define Round button Class to customise round icons in the left panel
+ */
+public class RoundButton extends JButton {
     public RoundButton(String label) {
         super(label);
         setPreferredSize(new Dimension(30, 10));
@@ -20,6 +18,6 @@ public class RoundButton  extends JButton {
 
     protected void paintBorder(Graphics g) {
         g.setColor(getForeground());
-        g.drawOval(50, 0, 170,     95);
+        g.drawOval(50, 0, 170, 95);
     }
 }
