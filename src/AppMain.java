@@ -184,7 +184,10 @@ public class AppMain extends JFrame implements ActionListener {
         menuBar.add(loadButton);
         menuBar.add(compileButton);
     }
-
+    /**
+     * Author: Samarth
+     * Desc: Generate the graph code for all tabs after successful code compilation
+     */
     private void generateGraphCode() {
         StringBuilder finalCode = new StringBuilder("digraph G{\n");
         for (int idx = 0; idx < jTabbedPane.getTabCount(); idx++) {
@@ -244,8 +247,8 @@ public class AppMain extends JFrame implements ActionListener {
             }
         }
         areConnectionsValid(iconList);
+        //Code to check if loop a cyclic connection exist for @ icon.
         for (IconMain iconFrom : connections.keySet()) {
-            //Code to check if loop a cyclic connection exist for @ icon.
             if (iconFrom.iconType.equals("@")) {
                 boolean looped = isLoopExist(iconFrom, iconFrom, connections);
                 visited.clear();
@@ -286,7 +289,7 @@ public class AppMain extends JFrame implements ActionListener {
     }
 
     /**
-     * Author: Srikar, Samarth
+     * Author: Srikar
      * Desc:  Method to generate graph code for an individual tab in the working panel.
      */
     private String generateSubGraphCode(HashMap<IconMain, Set<IconMain>> connections, int tabIndex) {
